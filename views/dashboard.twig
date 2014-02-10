@@ -1,0 +1,19 @@
+<div class="wrap">
+	<h2>{{site.name}} Dashboard</h2>
+
+	<h3>Where do you want to start?</h3>
+
+	<ul>
+		{% for square in blocks %}
+			<li>
+				<h4>{{square.title}}</h4>
+				<ul>
+				{% for link in square.links %}
+					<li><a href="{{link.link}}">{{link.label}}</a></li>
+				{% endfor %}
+				</ul>
+			</li>
+		{% endfor %}
+
+	</ul>
+</div>
