@@ -1,6 +1,6 @@
 <?php
 
-	class ChainsawDashboardBlock {
+	class ChainsawDashboardBrick{
 
 		var $title;
 		var $links;
@@ -17,7 +17,7 @@
 		}
 
 		function set_icon($icon_name){
-			
+
 		}
 
 	}

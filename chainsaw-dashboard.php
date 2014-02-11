@@ -11,12 +11,19 @@
 
 	class ChainsawDashboard {
 
-		var $_blocks;
+		var $_bricks;
 
-		function __construct(){
+		function __construct($json_file){
 			//self::clear();
 			add_action('admin_menu', array( $this,'register_menu') );
     		add_action('load-index.php', array( $this,'redirect_dashboard') );
+    		$this->load_json($json_file);
+		}
+
+		function load_json($json_file){
+			$json = file_get_contents(ABSPATH.$json_file);
+			$json = json_decode($json);
+			$this->_bricks = $json->bricks;
 		}
 
 		function redirect_dashboard(){
@@ -38,20 +45,20 @@
 			require_once( ABSPATH . 'wp-admin/admin-header.php' );
 			$data = array();
 			$data['site'] = new TimberSite();
-			$data['blocks'] = $this->_blocks;
+			$data['bricks'] = $this->_bricks;
 			Timber::render('dashboard.twig', $data);
 		}
 
 		public function add($block){
-			if (!$this->_blocks){
-				$this->_blocks = array();
+			if (!$this->_bricks){
+				$this->_bricks = array();
 			}
 			if (is_array($block)){
 				foreach($block as $b){
-					$this->_blocks[] = $b;
+					$this->_bricks[] = $b;
 				}
 			} else {
-				$this->_blocks[] = $block;
+				$this->_bricks[] = $block;
 			}
 		}
 

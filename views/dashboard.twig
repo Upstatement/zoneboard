@@ -4,16 +4,16 @@
 	<h3>Where do you want to start?</h3>
 
 	<ul>
-		{% for square in blocks %}
-			<li>
-				<h4>{{square.title}}</h4>
-				<ul>
-				{% for link in square.links %}
-					<li><a href="{{link.link}}">{{link.label}}</a></li>
+		{% for brick in bricks %}
+			<li class="dashboard-brick">
+			<div class="dashicons {{brick.icon}}"></div>
+			<h4>{{brick.label}}</h4>
+			<ul>
+				{% for link in brick.links %}
+					<li><a href="{{link.url}}">{{link.label}}</a></li>
 				{% endfor %}
-				</ul>
-			</li>
+			</ul>
+		</li>
 		{% endfor %}
-
 	</ul>
 </div>
