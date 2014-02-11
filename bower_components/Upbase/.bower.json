@@ -1,0 +1,19 @@
+{
+  "name": "Upbase",
+  "version": "0.1.4",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Upstatement/upbase.git"
+  },
+  "homepage": "https://github.com/Upstatement/upbase",
+  "_release": "0.1.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.4",
+    "commit": "6f212ab8c5a6bcff2b1b09d655ffd3b3cd0e50ab"
+  },
+  "_source": "git@github.com:Upstatement/upbase.git",
+  "_target": "~0.1.4",
+  "_originalSource": "git@github.com:Upstatement/upbase.git",
+  "_direct": true
+}

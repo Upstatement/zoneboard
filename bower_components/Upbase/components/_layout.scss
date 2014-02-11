@@ -1,0 +1,562 @@
+//
+// Universal 
+//
+
+// Kill the margin on the last column
+.ui-block:last-child,
+.ui-block.last {
+	margin-right: 0;
+}
+
+
+// ============================================= //
+
+// Media Grid							   		 // 
+
+// ============================================= //
+
+@mixin media-grid($num: 2, $pad: em(20), $target:'.media-block') {
+	margin-left: -#{$pad};
+	@include pie-clearfix;
+
+	> #{$target} {
+		float: left;
+		padding-left: #{$pad};
+		@if $num == 2 or $num == "two" {
+			width: 50%;
+			&:nth-of-type(2n+3) {
+				clear: left;
+			}
+			&.n3 {
+				clear:left;
+			}
+		}
+		@if $num == 3 or $num == "three" {
+			width: 33.3333%;
+			&:nth-of-type(3n+4) {
+				clear: left;
+			}
+			.ie7 & {
+				width: 33%;
+			}
+			&.n4 {
+				clear: left;
+			}
+		}
+		@if $num == 4 or $num == "four" {
+			width: 25%;
+			&:nth-of-type(4n+5) {
+				clear: left;
+			}
+			&.n5 {
+				clear: left;
+			}
+		}
+		@if $num == 5 or $num == "five" {
+			&:nth-of-type(5n+6) {
+				clear: left;
+			}
+			width: 20%;
+			&.n6 {
+				clear: left;
+			}
+		}
+		@if $num == 6 or $num == "six" {
+			&:nth-of-type(6n+7) {
+				clear: left;
+			}
+			width: 16.666%;
+			.ie7 & {
+				width: 16%;
+			}
+			&.n7 {
+				clear: left;
+			}
+		}
+	}
+} //media-grid
+
+
+// ============================================= //
+
+// UI Grids							   		     // 
+
+// ============================================= //
+
+// Static Column Grid Variation
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Setting one explicit column width while keeping the other liquid
+// WHY: It's annoying to remember this pattern and several numbers depend on one another
+// REF: http://alistapart.com/article/negativemargins
+
+// HTML:
+// <div class="l-static">
+//	<section class="ui-block-1">
+//		<div class="ui-block-inner">
+//
+//			<!-- Block 1 Content Goes Here -->
+//
+//		</div> <!-- /ui-block-inner -->
+//	</section> <!-- /ui-block-1 -->
+//	<section class="ui-block-2">
+//		<div class="ui-block-inner">
+//
+//			<!-- Block 2 Content Goes Here -->
+//
+//		</div> <!-- /ui-block-inner -->
+//	</section> <!-- /ui-block-2 --> 
+// </article> <!-- /l-static -->
+
+// USE: @include grid-static(300px, 40px);
+
+@mixin grid-static($width: 300px, $margin: 40px, $static-col: right) {
+	// Variables
+	$total: $width + $margin;
+
+	// If the right column has a static width
+	@if $static-col == right {
+		> .ui-block-1 {
+			width: 100%;
+			float: left;
+			margin-right: -$total;
+			> .ui-block-inner {
+				margin-right: $total;
+			}
+		}
+
+		> .ui-block-2 {
+			width: $width;
+			float: right;
+		}
+	} // right
+
+	// If the left column has a static width
+	@else {
+		> .ui-block-1 {
+			width: $width;
+			float: left;
+		}		
+		> .ui-block-2 {
+			width: 100%;
+			float: right;
+			margin-left: -$total;
+			> .ui-block-inner {
+				margin-left: $total;
+			}
+		}
+	} //else
+
+	@include pie-clearfix;
+}
+
+
+// Grid-2 vars
+
+$width-1: 50%; 
+$width-2: 50%; 
+$margin-r: 5%; 
+
+@mixin ui-grid-2($width-1: 50%, $width-2: 50%, $margin-r:5%) {
+	@include pie-clearfix;
+
+	> .ui-block-1,
+	> .ui-block.first {
+		width: $width-1 - ($margin-r/2);
+		@include float-left;
+		margin-right: $margin-r;
+	}
+
+	> .ui-block-2,	
+	> .ui-block.second {
+		width: $width-2 - ($margin-r/2);
+		@include float-left;
+		margin-right: 0;
+	}
+}
+
+@mixin ui-grid-rl($width-1: 50%, $width-2:50%, $margin-r:5%) {
+	@include pie-clearfix;
+
+	> .ui-block-1,	
+	> .ui-block.first {
+		width: $width-1 - ($margin-r/2);
+		@include float-right;
+	}
+	
+	> .ui-block-2,
+	> .ui-block.second {
+		width: $width-2 - ($margin-r/2);
+		@include float-left;
+		margin-right: 0;
+	}
+}
+
+@mixin ui-grid-lr($width-1:50%, $width-2:50%, $margin-r:5%) {
+	@include pie-clearfix;
+
+	> .ui-block-1,	
+	> .ui-block.first {
+		width: $width-1 - ($margin-r/2);
+		@include float-left;
+	}
+
+	> .ui-block-2,	
+	> .ui-block.second {
+		width: $width-2 - ($margin-r/2);
+		@include float-right;
+		margin-right: 0;
+	}
+}
+
+// Grid-3 vars 
+
+@mixin ui-grid-3($width3-1: 33.333%, $width3-2: 33.333%, $width3-3: 33.333%, $margin3-r: 3.5%)  {
+	@include pie-clearfix;
+
+	> .ui-block-1,
+	> .ui-block.first {
+		width: $width3-1 - ($margin3-r/3);
+		@include float-left;
+		margin-right: $margin3-r/2;
+	}
+
+	> .ui-block-2,	
+	> .ui-block.second {
+		width: $width3-2 - ($margin3-r/3);
+		@include float-left;
+		margin-right: $margin3-r/2;
+	}
+
+	> .ui-block-3,
+	> .ui-block.last {
+		width: $width3-3 - ($margin3-r/3);
+		@include float-left;
+		margin-right: 0;		
+	}
+}
+
+// Grid-3-rrl vars
+	
+@mixin ui-grid-rrl($width3-1: 33.333%, $width3-2: 33.333%, $width3-3: 33.333%, $margin3-r: 3.5%)  {
+	@include pie-clearfix;
+
+	> .ui-block-1,
+	> .ui-block.first {
+		width: $width3-1 - ($margin3-r/3);
+		@include float-right;
+		margin-right: 0;
+	}
+
+	> .ui-block-2,
+	> .ui-block.second {
+		width: $width3-2 - ($margin3-r/3);
+		@include float-right;
+		margin-right: $margin3-r/2;
+	}
+
+	> .ui-block-3,
+	> .ui-block.last {
+		width: $width3-3 - ($margin3-r/3);
+		@include float-left;
+		margin-right: $margin3-r/2;		
+	}
+}
+
+
+// Grid-4 vars 
+
+@mixin ui-grid-4($width4-1: 25%, $width4-2: 25%, $width4-3: 25%, $width4-4: 25%, $margin5-r: 8%) {
+
+	@include pie-clearfix;
+
+	> .ui-block-1,
+	> .ui-block.first {
+		width: $width4-1 - ($margin4-r/4);
+		@include float-left;
+		margin-right: $margin4-r/3;
+	}
+
+	> .ui-block-2,	
+	> .ui-block.second {
+		width: $width4-2 - ($margin4-r/4);
+		@include float-left;
+		margin-right: $margin4-r/3;
+	}
+
+	> .ui-block-3,
+	> .ui-block.third {
+		width: $width4-3 - ($margin4-r/4);
+		@include float-left;
+		margin-right: $margin4-r/3;
+	}
+
+	> .ui-block-4,
+	> .ui-block.last {
+		width: $width4-4 - ($margin4-r/4);
+		@include float-left;
+		margin-right: 0;	
+	}
+}
+
+
+// Grid-5 vars
+
+@mixin ui-grid-5($width5-1: 20%, $width5-2: 20%, $width5-3: 20%, $width5-4: 20%, $width5-5: 20%, $margin5-r: 8%) {
+
+	@include pie-clearfix;
+
+	> .ui-block-1,
+	> .ui-block.first {
+		width: $width5-1 - ($margin5-r/5);
+		@include float-left;
+		margin-right: $margin5-r/4;
+	}
+
+	> .ui-block-2,	
+	> .ui-block.second {
+		width: $width5-2 - ($margin5-r/5);
+		@include float-left;
+		margin-right: $margin5-r/4;
+	}
+
+	> .ui-block-3,
+	> .ui-block.third {
+		width: $width5-3 - ($margin5-r/5);
+		@include float-left;
+		margin-right: $margin5-r/4;
+	}
+
+	> .ui-block-4,
+	> .ui-block.fourth {
+		width: $width5-4 - ($margin5-r/5);
+		@include float-left;
+		margin-right: $margin5-r/4;
+	}
+
+	> .ui-block-5,
+	> .ui-block.last {
+		width: $width5-5 - ($margin5-r/5);
+		@include float-left;
+		margin-right: 0;	
+	}
+}
+
+//Jeff's universal ui-grid layout mixin
+
+@mixin cols($col-num: 2, $width-1: 0, $width-2: 0, $width-3: 0, $width-4: 0, $width-5: 0, $width-last: 0, $margin-r:5% ) {
+  
+	@include pie-clearfix;
+	$var-list: $col-num, $width-1, $width-2, $width-3, $width-4, $width-5, $width-last, $margin-r;
+ 
+	//Discovers margin option
+	@for $num from 1 through length($var-list) {
+		$value: nth($var-list, $num);
+		@if $num == ($col-num + 2){
+			@if $num < length($var-list) {
+				@if type_of($value) == number {
+					@if unit($value) == "%" {
+						$margin-r: $value;
+					}
+				}
+			}
+		}
+	}
+ 
+	//Flip functionality
+	$flip: false;
+	@each $var in $var-list {
+		@if $var == flip {
+			$flip: true;
+		}
+	}
+	@if $col-num == flip { $col-num: 2; }
+	@if $margin-r == flip { $margin-r: 5%; }
+	@if $width-1 == flip { $width-1: 0; }
+	@if $width-2 == flip { $width-2: 0; }
+	@if $width-3 == flip { $width-3: 0; }
+	@if $width-4 == flip { $width-4: 0; }
+	@if $width-5 == flip { $width-5: 0; }
+	//eo flip functionality
+ 
+	//Default values given no supplied values
+	@if $width-1 == 0 { $width-1: 100% / $col-num; }
+	@if $width-2 == 0 { $width-2: 100% / $col-num; }
+	@if $width-3 == 0 { $width-3: 100% / $col-num; }
+	@if $width-4 == 0 { $width-4: 100% / $col-num; }
+	@if $width-5 == 0 { $width-5: 100% / $col-num; }
+	@if $width-last == 0 { $width-last: 100% / $col-num; }
+ 
+	//width-last needs to be determined no matter what, in case it's not supplied
+	@if $col-num == 6 { $width-last: 100% - $width-5 - $width-4 - $width-3 - $width-2 - $width-1; }
+	@if $col-num == 5 { $width-last: 100% - $width-4 - $width-3 - $width-2 - $width-1; }
+	@if $col-num == 4 { $width-last: 100% - $width-3 - $width-2 - $width-1; }
+	@if $col-num == 3 { $width-last: 100% - $width-2 - $width-1; }
+	@if $col-num == 2 { $width-last: 100% - $width-1; }
+ 
+	//Needed to reset var-list for some reason
+	$var-list: $col-num, $width-1, $width-2, $width-3, $width-4, $width-5, $width-last, $margin-r;
+	$name-list: first, second, third, fourth, fifth, sixth;
+ 
+	//First col - second-to-last col
+	@for $num from 2 through $col-num {
+		$width: nth($var-list, $num);
+		$name: nth($name-list, ($num - 1));
+		$col: $num - 1;
+		> .col-#{$col},
+		> .col.#{$name} {
+			margin-right: $margin-r/($col-num - 1);
+			width: $width - ($margin-r/$col-num);
+			@include float-left;
+			@if $flip == true {
+				@include float-right;
+			}
+		}
+	}	
+ 
+	//Last col
+	> .col-#{$col-num},
+	> .col.#{nth($name-list, $col-num)},
+	> .col.last {
+		width: $width-last - ($margin-r/$col-num);
+		@include float-left;
+		margin-right: 0;		
+	}
+}
+
+
+
+// ============================================= //
+
+// Micro Layouts						   		 // 
+
+// ============================================= //
+
+
+// Art & Text Pairs
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Harmoniously placing art and text next to each other.
+// Good for thumbnails/text and many other art/text situations
+// WHY: It's a common pattern. It's easier to write this way.
+
+// HTML:
+// <article class="l-pair">
+//	<div class="art-bd">
+//		<img class="art" src="#" />
+//	</div> <!-- /art-bd -->
+//	<div class="txt-bd">
+//		<h1>Headline</h1>
+//		<p>Paragraph paragraph paragraph paragraph</p>
+//	</div> <!-- /txt-bd -->
+// </article> <!-- /l-pair -->
+
+// USE: @include pair(100px, 30px);
+
+@mixin pair($art-width: 50px, $art-margin: 20px, $v-align: middle, $direction: left) {
+	$gutter: $art-width + $art-margin;
+	@include pie-clearfix;
+
+	@if $v-align == middle {
+		display: table;
+
+		> .art-bd {
+			display: table-cell;
+			width: $art-width;
+			margin: 0;
+			> img,
+			> .art {
+				@include resp-img;
+			}
+		}
+		> .txt-bd {
+			display: table-cell;
+			vertical-align: middle;
+			padding-left: $art-margin;
+		}
+
+		// If lower than IE8, which has no
+		// support for tables
+		.lt-ie8 & {
+			> .art-bd,
+			> .txt-bd {
+				display: block;
+			}
+			> .art-bd {
+				width: $art-width;
+				float: left;
+			}
+			> .txt-bd {
+				margin-left: $gutter;
+			}
+		} // .lt-ie8
+	} //middle
+
+	@else {
+		> .art-bd,
+		> .txt-bd {
+			display: block;
+		}
+		> .art-bd {
+			width: $art-width;
+			@if $direction == right {
+				float: right;
+			} @else {
+				float: left;
+			}
+			margin: 0;
+			> img,
+			> .art {
+				@include resp-img;
+			}
+		}
+		> .txt-bd {
+			@if $direction == right {
+				margin-right: $gutter;
+			} @else {
+				margin-left: $gutter;
+			}
+		}
+	}
+
+} //pair	
+
+	
+// ============================================= //
+
+// Spacers						   			     // 
+
+// ============================================= //
+
+// Variables
+
+$spacer: 50px;
+$spacer-small: round($spacer/5);
+$spacer-med: round($spacer/2);
+$spacer-large: round($spacer*1.5);
+
+
+$spacer-top: inherit !default;
+$spacer-bottom: inherit !default;
+
+@mixin spacer($spacer-top, $spacer-bottom) {
+	margin-top: $spacer-top;
+	margin-bottom: $spacer-bottom;
+}
+
+
+// Selectors
+
+%spacer {
+	margin-bottom: $spacer;
+}
+
+%spacer-small {
+	margin-bottom: $spacer-small;
+}
+
+%spacer-med {
+	margin-bottom: $spacer-med;
+}
+
+%spacer-large {
+	margin-bottom: $spacer-large;
+}

@@ -1,0 +1,834 @@
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+//	Functions							 			   
+
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+// Flexible Grid Proportion Calculator
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Figuring out the ideal percentage of a responsive container.
+// Based on the equation target / context = result.
+// Math usually based on values takne from a static design.
+// WHY: Math is easier this way.
+// REF: http://www.lukew.com/ff/entry.asp?1167
+// USE: width: resp(300px);
+@function resp($target, $context: 960){
+	@return percentage($target / $context); 
+}
+
+// Em Calculator
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Simply writing ems while allowing you to think in more straightforward px values
+// WHY: I don't think in ems. Do you?
+// NOTE: Ems calculated using the document base; override by providing optional second value
+// REF: http://bourbon.io/docs/#px-to-em
+// USE: em(12);
+
+@function em($pxval, $base: 13) {
+  @if not unitless($pxval) {
+      $pxval: strip-units($pxval);
+  }
+  @if not unitless($base) {
+      $base: strip-units($base);
+  }
+  @return #{($pxval/$base)}em;
+}
+
+// Strip Units
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Removing the unit from a number and returning the raw value
+// REF: https://github.com/nex3/sass/issues/533
+// REF: http://stackoverflow.com/questions/12328259/how-do-you-strip-the-unit-from-any-number-in-sass/12335841#12335841
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+ }
+
+ // Prefixer
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Easily applying range of vendor prefixes when rolling
+// your own mixins. This comes straight from Bourbon.io 
+// USE: @include prefixer(border-radius, $radii, webkit ms spec);
+
+$prefix-for-webkit:    true !default;
+$prefix-for-mozilla:   true !default;
+$prefix-for-microsoft: true !default;
+$prefix-for-opera:     true !default;
+$prefix-for-spec:      true !default; // required for keyframe mixin
+
+@mixin prefixer ($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      @if $prefix-for-webkit {
+        -webkit-#{$property}: $value;
+      }
+    }
+    @else if $prefix == moz {
+      @if $prefix-for-mozilla {
+        -moz-#{$property}: $value;
+      }
+    }
+    @else if $prefix == ms {
+      @if $prefix-for-microsoft {
+        -ms-#{$property}: $value;
+      }
+    }
+    @else if $prefix == o {
+      @if $prefix-for-opera {
+        -o-#{$property}: $value;
+      }
+    }
+    @else if $prefix == spec {
+      @if $prefix-for-spec {
+        #{$property}: $value;
+      }
+    }
+    @else  {
+      @warn "Unrecognized prefix: #{$prefix}";
+    }
+  }
+}
+
+@mixin disable-prefix-for-all() {
+  $prefix-for-webkit:    false;
+  $prefix-for-mozilla:   false;
+  $prefix-for-microsoft: false;
+  $prefix-for-opera:     false;
+  $prefix-for-spec:      false;
+}
+
+
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+//	Helpers							 			   
+
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+// The Media Query Mixin
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Write less verbose Media Queries with variables 
+// or using straight figures (eg 320px)
+// WHY: Faster to write. More flexible. Lets you write 
+// media query variables on the fly.
+// USE: @include mq(320px, 798px);
+// USE: @include mq($tablet, $desktop);
+
+@mixin mq($breakpoint-1, $breakpoint-2: 0) {
+  @if $breakpoint-1 == "max" {
+    @media (max-width:$breakpoint-2 - 1) { @content; }
+  }
+
+  @elseif unitless($breakpoint-2) {
+    @media (min-width: $breakpoint-1) { @content; }
+  } //single breakpoint
+
+  @else {
+    @media (min-width: $breakpoint-1) and (max-width:$breakpoint-2 - 1) { @content; }
+  } //bracketed breakpoint
+}
+
+// Responsive Images
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Setting the default properties of a responsive image
+// WHY: It's repetitive. Saves re-writing of multiple rules.
+// USE: @include resp-img;
+@mixin resp-img {
+	width: 100%;
+	max-width: 100%; 
+}
+
+// Content
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Filling psuedo-clases :before, :after with blank content
+// WHY: Psuedo classes won't appear unless you fill them with content.
+// This mixin includes the difficult-to-recall cross-browser character code for "blank". 
+// USE: @include content;
+@mixin content($content: \0020) {
+	content: "#{$content}";
+}
+
+// Hide Text
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Visually Hiding Text  
+// WHY: Says exactly what it does. Easier than remembering and writing each time. 
+// The newest proper way to hide text (not the text-indent method anymore)
+// USE: @include hide-text;
+ 
+@mixin hide-text {
+  color:            transparent;
+  font:             0/0 a;
+  text-shadow:      none;
+}
+
+// Transitions
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Quick application of transition properties
+// WHY: This are our most common defaults
+// USE: @include trans;
+// USE: @include trans(.1s, opacity, linear);
+@mixin trans($time: .2s, $property: all, $timing-function: ease-in) {
+	@include single-transition(#{$property}, #{$time}, #{$timing-function}, false);
+}
+
+// User Select
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Making text unselectable by the user
+// WHY: Sometimes the cursor highlights text on clickable elements (in particular buttons),
+// which can confuse the user intent. This is especially true on touch interfaces. 
+// This mixin is an easy cross-browser way to repress text selection.
+// USE: @include user-select;
+@mixin user-select($value: none) {
+  @include prefixer(user-select, $value, webkit moz ms o spec);
+}
+
+// Appearance
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+@mixin appearance ($value) {
+  @include prefixer(appearance, $value, webkit moz ms o spec);
+}
+
+
+// Reset Clearfix
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Removing pie-clearfix from an element after it's been applied
+// WHY: Hard to remember attribute combo. Helpful in responsive layouts.
+// USE: @include reset-clearfix;
+@mixin reset-clearfix {
+	&:after {
+		display: initial;
+		clear: none;
+	}
+}
+
+
+// Size
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Applying width & height in a single declaration
+// WHY: Faster. Less typing. Easier to deal with squares.
+// NOTE: If you supply a single value, the result is a square  
+// REF: http://bourbon.io/docs/#size
+// USE: @include size(50px 100px);
+ 
+@mixin size($size) {
+  @if length($size) == 1 {
+    @if $size == auto {
+      width:  $size;
+      height: $size;
+    }
+ 
+    @else if unitless($size) {
+      width:  $size + px;
+      height: $size + px;
+    }
+ 
+    @else if not(unitless($size)) {
+      width:  $size;
+      height: $size;
+    }
+  }
+ 
+  // Width x Height
+  @if length($size) == 2 {
+    $width:  nth($size, 1);
+    $height: nth($size, 2);
+ 
+    @if $width == auto {
+      width: $width;
+    }
+    @else if not(unitless($width)) {
+      width: $width;
+    }
+    @else if unitless($width) {
+      width: $width + px;
+    }
+ 
+    @if $height == auto {
+      height: $height;
+    }
+    @else if not(unitless($height)) {
+      height: $height;
+    }
+    @else if unitless($height) {
+      height: $height + px;
+    }
+  }
+}
+
+
+// Tint & Shade 
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: More reliable color manipulation
+// WHY: Built-in SASS color functions can be limited and unpredictable
+// This functions more like swatch tints in Adobe programs
+// HOW: Adds a percentage of black or white to the base color
+// REF: http://bourbon.io/docs/#tint-shade
+// USE: @include tint(red, 40%);
+
+// Add percentage of white to a color
+@function tint($color, $percent){
+  @return mix(white, $color, $percent);
+}
+
+// Add percentage of black to a color
+@function shade($color, $percent){
+  @return mix(black, $color, $percent);
+}
+
+@function black($amt : 50){
+	$pct : ($amt / 100);
+	$pct : 1 - $pct;
+	@return rgb(255 * $pct, 255 * $pct, 255*$pct);
+}
+
+@function white($amt : 50){
+	$pct : ($amt / 100);
+	@return rgb(255 * $pct, 255 * $pct, 255*$pct);
+}
+
+
+// Input Defaults 
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Zero'ing out the style on an input field (text input, radio button, etc)
+// WHY: It's a lot to write and remember all these characteristics
+// USE: @include input-default;
+@mixin input-default {
+	border: 0;
+	background-color: transparent;
+	@include box-shadow(none);
+	@include border-radius(0);
+	-webkit-appearance: none;
+	&:focus {
+		outline: 0;
+	}
+}
+
+
+// Triangles
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Quickly making CSS triangles
+// WHY: It's annoying to remember how these attribute work. 
+// Plus CSS triangles are really flexible and awesome.
+// USE: @include triangle(right, 6px, #000, .68);
+@mixin triangle($tri-orientation: down, $tri-width: 3px, $tri-color: #666, $mult:1) {
+	@include rotate(.1deg);
+	
+	@if $tri-orientation == "up" or $tri-orientation == "top" {
+		border-left: $tri-width*$mult solid transparent;
+		border-right: $tri-width*$mult solid transparent;
+		border-bottom: $tri-width solid $tri-color;
+	}
+
+	@if $tri-orientation == "down" or $tri-orientation == "bottom" {
+		border-left: $tri-width*$mult solid transparent;
+		border-right: $tri-width*$mult solid transparent;
+		border-top: $tri-width solid $tri-color;
+	}
+
+	@if $tri-orientation == "left" {
+		border-top: $tri-width*$mult solid transparent;
+		border-bottom: $tri-width*$mult solid transparent;
+		border-right: $tri-width solid $tri-color;
+		border-left:0px solid transparent;
+	}
+
+	@if $tri-orientation == "right" {
+		border-top: $tri-width*$mult solid transparent;
+		border-bottom: $tri-width*$mult solid transparent;
+		border-left: $tri-width solid $tri-color;
+		border-right:0px solid transparent;
+	}
+}
+
+// Absolute Positioning
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Quickly setting the top, right, left, and bottom positions of an absolutely positioned element
+// WHY: It's verbose to write everytime in CSS
+// USE: @include absolute(0 0 10px 0);
+@mixin absolute($coordinates: n n n n) {
+
+  $top: nth($coordinates, 1);
+  $right: nth($coordinates, 2);
+  $bottom: nth($coordinates, 3);
+  $left: nth($coordinates, 4);
+
+  position: absolute;
+
+  @if $top == auto or $top == a {
+    top: auto;
+  }
+  // Print nothing if we write an "n" or "none"
+  @else if $top == n or $top == none {
+  }
+  @else {
+    top: $top;
+  }
+
+  @if $right == auto or $right == a {
+    right: auto;
+  }
+  // Print nothing if we write an "n" or "none"
+  @else if $right == n or $right == none {
+  }
+  @else {
+    right: $right;
+  }
+
+  @if $bottom == auto or $bottom == a {
+    bottom: auto;
+  }
+  // Print nothing if we write an "n" or "none"
+  @else if $bottom == n or $bottom == none{
+  }
+  @else {
+    bottom: $bottom;
+  }
+
+  @if $left == auto or $left == a {
+    left: auto;
+  }
+  // Print nothing if we write an "n" or "none"
+  @else if $left == n or $left == none {
+  }
+  @else {
+    left: $left;
+  }
+}
+
+@mixin unabsolute {
+	position: static;
+	top: auto;
+	right: auto;
+	bottom: auto;
+	left: auto;
+}
+
+// Psuedo
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Quickly pasting essential and commonly used properties that make psuedo classes work 
+// WHY: Easier than remembering and writing each time. Should cut down on mistakes/debugging.
+// USE: @include pseudo;
+@mixin psuedo($coordinates: none) {
+  @include content;
+  display: block;
+  @if $coordinates != "none" {
+    @include absolute($coordinates); 
+  }
+}
+
+// Ellipsis
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Truncating text with an ellipsis the CSS way
+// WHY: It's hard to recall using this combination of attributes
+// USE: @include ellipsis;
+@mixin ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+// Placeholder
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Applying placeholder and making it cross-browser
+// compatible. This comes straight from Bourbon.io 
+// USE: Nested inside of another selector
+// USE: @include pholder { color: red };
+
+$placeholders: '-webkit-input-placeholder',
+               '-moz-placeholder',
+               '-ms-input-placeholder';
+
+@mixin placeholder {
+  @each $placeholder in $placeholders {
+    @if $placeholder == "-webkit-input-placeholder" {
+      &::#{$placeholder} {
+        @content;
+      }
+    }
+    @else if $placeholder == "-moz-placeholder" {
+      // FF 18-
+      &:#{$placeholder} {
+        @content;
+      }
+
+      // FF 19+
+      &::#{$placeholder} {
+        @content;
+      }
+    }
+    @else {
+      &:#{$placeholder} {
+        @content;
+      }
+    }
+  }
+}
+
+// Placeholder Text
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Styling placeholder text color states (default, hover, focus) 
+// WHY: Provides a shortcut for writing the code, which is necessarily long
+// because selectors cannot be combined. Also a cross-browser solution.
+// USE: @include placholder(#999, #999, #222);
+@mixin placeholder-state($default: inherit, $hover: $default, $focus: $default){
+	// You have to declare these separately in order to work
+	&::-webkit-input-placeholder {
+	    color: $default;
+	}
+	&:-moz-placeholder {
+	    color: $default;
+	}
+	&:hover::-webkit-input-placeholder {
+	    color: $hover;
+	}
+	&:hover:-moz-placeholder {
+	    color: $hover;
+	}
+	&:focus::-webkit-input-placeholder {
+	    color: $focus;
+	}
+	&:focus:-moz-placeholder {
+	    color: $focus;
+	}
+}
+	
+
+// SVG Fallback Pattern
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Setting PNG fallbacks for SVG background images
+// WHY: Saves time and typing and is guaranteed to work across devices 
+// NOTE 1: This uses multiple background images as a proxy for SVG support
+// NOTE 2: You still need to set the display (inline-block or block) 
+// and a height/width for the container
+// NOTE 3: "image-url" is a helper that automatically creates a relative link to the _img folder
+// from wherever it's called. This function is built-in to Compass. It's rare that you'll need
+// change the base folder (_img) but it can be done in the config.rb file in the root 
+// REF: http://css-tricks.com/svg-fallbacks/
+// REF: http://compass-style.org/reference/compass/helpers/urls
+// USE: @include svg(imageName);
+
+@mixin svg($image, $cover: true) {
+  // Variables
+  $svg: $svg-path + $image + ".svg";
+  $png: $svg-path + $image + ".png";
+  $ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+ image-url($png) +"', sizingMethod='scale')";
+
+  // Universal properties
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+
+  // Fallback pattern
+  background-image: image-url($png);
+  background-image: image-url($svg), none;
+
+  @if $cover == true {
+    // Makes sure that image scales if necessary, works for IE9
+    @include background-size(cover);
+    filter: $ms-filter;
+    -ms-filter: $ms-filter;
+  }
+
+} // svg
+
+
+// RGBA Background Fallback Pattern
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Setting safe fallbacks for RGBA background colors (black & white only)
+// WHY: Saves time and typing; guaranteed to work across devices 
+// USE: @include rgba-bg(black, .5);
+
+@mixin rgba-bg($color: white, $alpha: .1) {
+	// Strip units from alpha in case user tries to pass a percentage ...
+	$alpha: strip-units($alpha);
+	@if $alpha > 1 {
+		$alpha: $alpha * .01;
+	}
+
+	// Turn decimal into whole number for use with fallback
+	$a-integer: $alpha * 100;
+
+	// Set fallback background image, including path 
+	$fallback-bg: '#{$rgba-bg-path}#{$color}-#{$a-integer}' + '.png';
+
+	@if $color == transparent {
+		background-color: transparent;
+		.no-rgba & {
+			background-color: transparent;
+		}
+	}
+	@else {
+		background-color: $color;
+
+		@if $color == white or $color == #fff or $color == #ffffff  {
+			background-color: rgba(255,255,255,$alpha);
+		}
+		@else {
+			background-color: rgba(0,0,0,$alpha);
+		}
+
+		.no-rgba & {
+			background: transparent image-url(#{$fallback-bg}) 50% 50% repeat;
+		}
+	}
+}
+
+
+// FOUT: Flash of Unstyled Type
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Making text appear on the page only after webfonts have loaded.
+// Doesn't work without the hooks provided by using Google Webfont Loader (see: snips.html).
+// WHY: Who wants to write this same six lines of code over and over?
+// USE: @include fout;
+@mixin fout {
+	.wf-loading & {
+		visibility: hidden;
+	}
+	.wf-active &,
+	.wf-inactive & {
+		visibility: visible;
+	}	
+}
+
+// Retina Background Images
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Serving larger background images when the user agent has a retina display 
+// WHY: Because it's a long list of hard-to-remember proprietary code
+// REF: Idea originates here: http://37signals.com/svn/posts/3271-easy-retina-ready-images-using-scss
+// USE: @include retina(image.png, 8px, 10px);
+
+@mixin retina($image, $width, $height) {
+  @media (min--moz-device-pixel-ratio: 1.1),
+         (-o-min-device-pixel-ratio: 2.1/2),
+         (-webkit-min-device-pixel-ratio: 1.1),
+         (min-device-pixel-ratio: 1.1),
+         (min-resolution: 96dpi) {
+    // on retina, use image that's scaled by 2
+	background-image: $image;
+	@include background-size($width $height);
+  }
+}
+
+
+// Responsive Video
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Giving yourself a responsive video that maintains its aspect ratio 
+// WHY: Annoying to remember/lookup
+// REF: http://webdesignerwall.com/tutorials/css-elastic-videos
+// USE: @include video;
+
+@mixin video($aspect: wide) {
+
+	@if $aspect == wide or $aspect == cinema or $aspect == 16/9 {
+		$aspect: 56.25%;
+	}
+	@else if $aspect == tv or $aspect == 4/3 {
+		$aspect: 75%;
+	}
+
+    position: relative;
+    padding-bottom: $aspect;
+    padding-top: 30px;
+    height: 0;
+    iframe,  
+    object,  
+    embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }
+}
+
+
+// Absolute Centering
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Centering (both horizontally & vertically) 
+// absolutely positioned items
+// WHY: This does the math for you
+// USE: @include absolute-center(n 22px);
+@mixin absolute-center($dimensions) {
+  // If only one value is supplied, 
+  // default to center the width
+  @if length($dimensions) == 1 {
+    $dimensions: $dimensions n;
+  }
+
+  $width: nth($dimensions, 1);
+  $height: nth($dimensions, 2);
+
+  position: absolute;
+
+  @if $width != n {
+    @if not(unitless($width)) {
+      width: $width;
+      margin-left: (-$width / 2);
+    }
+    @if unitless($width) {
+      width: $width + px;
+      margin-left: (-$width / 2) + px;
+    }
+    left: 50%;
+  }
+
+  @if $height != n {
+    @if not(unitless($height)) {
+      height: $height;
+      margin-top: (-$height / 2);
+    }
+    @if unitless($height) {
+      height: $height + px;
+      margin-top: (-$height / 2) + px;
+    }
+    top: 50%;
+  }
+} // absolute-center
+
+
+
+// Animation Mixin
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+// FOR: Writing animation properties and having them work everywhere
+// WHY: Ensure compability. It's time-consuming to write cross-browser.
+// USE: @include animation(fadedown 4s ease);
+// REF: http://www.w3.org/TR/css3-animations/#the-animation-name-property-
+
+// NOTE: Each of these mixins support comma separated lists of values, 
+// which allows different transitions for individual properties 
+// to be described in a single style rule. Each value in the list 
+// corresponds to the value at that same position in the other properties.
+
+// Official animation shorthand property.
+@mixin animation ($animations...) {
+  @include prefixer(animation, $animations, webkit moz spec);
+}
+
+// Individual Animation Properties
+@mixin animation-name ($names...) {
+  @include prefixer(animation-name, $names, webkit moz spec);
+}
+
+
+@mixin animation-duration ($times...) {
+  @include prefixer(animation-duration, $times, webkit moz spec);
+}
+
+
+@mixin animation-timing-function ($motions...) {
+// ease | linear | ease-in | ease-out | ease-in-out
+  @include prefixer(animation-timing-function, $motions, webkit moz spec);
+}
+
+
+@mixin animation-iteration-count ($values...) {
+// infinite | <number>
+  @include prefixer(animation-iteration-count, $values, webkit moz spec);
+}
+
+
+@mixin animation-direction ($directions...) {
+// normal | alternate
+  @include prefixer(animation-direction, $directions, webkit moz spec);
+}
+
+
+@mixin animation-play-state ($states...) {
+// running | paused
+  @include prefixer(animation-play-state, $states, webkit moz spec);
+}
+
+
+@mixin animation-delay ($times...) {
+  @include prefixer(animation-delay, $times, webkit moz spec);
+}
+
+
+@mixin animation-fill-mode ($modes...) {
+// none | forwards | backwards | both
+  @include prefixer(animation-fill-mode, $modes, webkit moz spec);
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes $name {
+	@content;
+  }
+  @-moz-keyframes $name {
+    @content;
+  }
+  @keyframes $name {
+    @content;
+  }
+}
+
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+//
+// Sprites	
+//
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+
+// Let Compass make Sprites for us
+// http://compass-style.org/help/tutorials/spriting/
+//@import "compass/utilities/sprites/base";
+
+// Make a sprite from all the images in the "_img > sprite" folder
+//$sprite-layout:horizontal;
+//$sprite-sprite-dimensions:true;
+//@import "sprite/*.png";
+//@include all-sprite-sprites;
+
+//
+// Retina Sprites 
+//
+
+// UNCOMMENT TO ENABLE RETINA SPRITES
+// Place all your retina images in retina folder
+
+// Make a sprite from all the images in the "_img > retina" folder
+// $retina-layout:horizontal;
+// @import "retina/*.png";
+// @include all-retina-sprites; 
+
+// .sprite-sprite {
+// 	@include retina($retina-sprites, 8px, 10px);		
+// }
+
+
+
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+//
+// Paul Irish HTML5 Helpers	
+//
+// ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+// Image replacement
+@mixin ir { 
+	display: block; 
+	text-indent: -999em; 
+	overflow: hidden; 
+	background-repeat: no-repeat; 
+	text-align: left; 
+	direction: ltr; 
+}
+
+// Hide for both screenreaders and browsers
+//   css-discuss.incutio.com/wiki/Screenreader_Visibility
+@mixin hidden { 
+	display: none; 
+	visibility: hidden; 
+} 
+
+// Hide only visually, but have it available for screenreaders 
+//   www.webaim.org/techniques/css/invisiblecontent/  &  j.mp/visuallyhidden
+@mixin visuallyhidden { 
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px); 
+}
+
+// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: drupal.org/node/897638
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+// Hide visually and from screenreaders, but maintain layout
+@mixin invisible { 
+	visibility: hidden; 
+}
