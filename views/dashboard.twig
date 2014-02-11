@@ -13,7 +13,11 @@
 			<h4>{{brick.label}}</h4>
 			<ul>
 				{% for link in brick.links %}
-					<li><a href="{{link.url}}">{{link.label}}</a></li>
+					{% if '{{' in link.url %}
+						<li><a href="{{include(template_from_string(link.url))}}">{{link.label}}</a></li>
+					{% else %}
+						<li><a href="{{link.url}}">{{link.label}}</a></li>
+					{% endif %}
 				{% endfor %}
 			</ul>
 		</li>
