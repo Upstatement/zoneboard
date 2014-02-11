@@ -1,12 +1,7 @@
-<link rel='stylesheet' href='/wp-content/plugins/chainsaw-dashboard/css/chainsaw-dashboard.css' type='text/css' media='all' />
+<link rel='stylesheet' href='/wp-content/plugins/chainsaw-dashboard-master/css/chainsaw-dashboard.css' type='text/css' media='all' />
 <div class="wrap">
 	<h2>{{site.name}} Dashboard</h2>
-<<<<<<< HEAD
 	<div class= "intro-line"><h3>Where do you want to start?</h3></div>
-=======
-
-	<i class="fa fa-bookmark"></i> fa-bookmark <h3>Where do you want to start?</h3>
->>>>>>> 275ba041b577b1915344e9831e8a0f6e9b7ea10a
 
 	<ul>
 		{% for brick in bricks %}
@@ -15,7 +10,6 @@
 			
 			<div class="panel-content">
 			<li class="dashboard-brick">
-<<<<<<< HEAD
 			   <div class="topline"><i class="icon fa {{brick.icon}}"></i><span class="panel-headline"> {{brick.label}}</span></div>
 			   <hr class = "seperator">
 				<div class="inpanel-links" >
@@ -30,20 +24,6 @@
 		</div>
 
 
-=======
-			<div class="dashicons {{brick.icon}}"></div>
-			<h4>{{brick.label}}</h4>
-			<ul>
-				{% for link in brick.links %}
-					{% if '{{' in link.url %}
-						<li><a href="{{include(template_from_string(link.url))}}">{{link.label}}</a></li>
-					{% else %}
-						<li><a href="{{link.url}}">{{link.label}}</a></li>
-					{% endif %}
-				{% endfor %}
-			</ul>
-		</li>
->>>>>>> 275ba041b577b1915344e9831e8a0f6e9b7ea10a
 		{% endfor %}
 	</ul>
 
