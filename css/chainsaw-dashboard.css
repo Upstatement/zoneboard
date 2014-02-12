@@ -1739,29 +1739,17 @@
   content: "\f196";
 }
 
-html,
-body,
-.wrap {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  overflow: scroll;
-  overflow-x: hidden;
-}
-
 .intro-line h3 {
   font-weight: 300;
 }
 
 .panel-headline {
-  font-size: 21px;
-  color: white;
+  font-size: 18px;
   font-weight: 300;
   padding-left: 7px;
   text-transform: uppercase;
-  letter-spacing: .09em;
+  letter-spacing: .07em;
+  color: #3b7183;
 }
 
 .panel-content {
@@ -1773,9 +1761,8 @@ body {
   display: inline-block;
   margin: 30px 13px 20px 10px;
   padding: 29px 0;
-  max-width: 45%;
-  width: 170px;
-  height: 150px;
+  width: 220px;
+  min-height: 150px;
   vertical-align: top;
   background-color: white;
   text-align: left;
@@ -1788,21 +1775,10 @@ body {
   font-weight: 200;
   font-size: 20px;
 }
-.dashboard-panel .topline {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  padding: 17px 14px;
-  width: 143px;
-  background-color: #8cbccb;
-}
 .dashboard-panel:hover {
   -webkit-box-shadow: -2px -1px 25px 0px #cccccc;
   -moz-box-shadow: -2px -1px 25px 0px #cccccc;
   box-shadow: -2px -1px 25px 0px #cccccc;
-}
-.dashboard-panel:hover .topline {
-  background-color: #69a7bb;
 }
 
 .inpanel-links {
@@ -1816,10 +1792,6 @@ body {
 .inpanel-links .control-links {
   text-decoration: none;
   color: #666666;
-  font-size: 18px;
-  letter-spacing: .04em;
-  font-variant: small-caps;
-  text-transform: lowercase;
   line-height: .5em;
 }
 .inpanel-links ul > li:hover .bullet-square {
@@ -1830,6 +1802,6 @@ body {
 }
 
 .icon {
-  color: white;
   font-size: 23px;
+  color: #69a7bb;
 }
