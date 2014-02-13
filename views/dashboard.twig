@@ -1,4 +1,4 @@
-<link rel='stylesheet' href='/wp-content/plugins/chainsaw-dashboard-master/css/chainsaw-dashboard.css' type='text/css' media='all' />
+<link rel='stylesheet' href='/wp-content/plugins/chainsaw-dashboard/css/chainsaw-dashboard.css' type='text/css' media='all' />
 <div class="wrap">
 	<h2>{{site.name}} Dashboard</h2>
 	<div class= "intro-line"><h3>Where do you want to start?</h3></div>
@@ -15,7 +15,11 @@
 				<div class="inpanel-links" >
 					<ul>
 						{% for link in brick.links %}
-							<li><i class="bullet-square fa fa-square"></i><a class="control-links" href="{{link.url}}">{{link.label}}</a></li>
+							{% if '{{' in link.url %}
+								<li><i class="bullet-square fa fa-square"></i><a class="control-links" href="{{include(template_from_string(link.url))}}">{{link.label}}</a></li>
+							{% else %}
+								<li><i class="bullet-square fa fa-square"></i><a class="control-links" href="{{link.url}}">{{link.label}}</a></li>
+							{% endif %}
 						{% endfor %}
 					</ul>
 				</div>
