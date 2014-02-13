@@ -1,3 +1,18 @@
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+.ui-block:last-child,
+.ui-block.last {
+  margin-right: 0;
+}
+
 /*
  *  Font Awesome 4.0.3 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -1746,39 +1761,83 @@
 .panel-headline {
   font-size: 18px;
   font-weight: 300;
-  padding-left: 7px;
   text-transform: uppercase;
   letter-spacing: .07em;
   color: #3b7183;
 }
 
-.panel-content {
-  padding-left: 20px;
+.dashboard-brick {
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: white;
+  min-height: 150px;
+  -webkit-box-shadow: #cccccc -2px -1px 5px 0px;
+  -moz-box-shadow: #cccccc -2px -1px 5px 0px;
+  box-shadow: #cccccc -2px -1px 5px 0px;
+}
+.dashboard-brick:hover {
+  -webkit-box-shadow: -2px -1px 25px 0px #cccccc;
+  -moz-box-shadow: -2px -1px 25px 0px #cccccc;
+  box-shadow: -2px -1px 25px 0px #cccccc;
 }
 
 .dashboard-panel {
   position: relative;
-  display: inline-block;
-  margin: 30px 13px 20px 10px;
-  padding: 29px 0;
-  width: 220px;
-  min-height: 150px;
   vertical-align: top;
-  background-color: white;
   text-align: left;
   border-radius: 8px;
-  -webkit-box-shadow: -2px -1px 5px 0px #cccccc;
-  -moz-box-shadow: -2px -1px 5px 0px #cccccc;
-  box-shadow: -2px -1px 5px 0px #cccccc;
 }
 .dashboard-panel h4 {
   font-weight: 200;
   font-size: 20px;
 }
-.dashboard-panel:hover {
-  -webkit-box-shadow: -2px -1px 25px 0px #cccccc;
-  -moz-box-shadow: -2px -1px 25px 0px #cccccc;
-  box-shadow: -2px -1px 25px 0px #cccccc;
+
+@media (min-width: 475px) and (max-width: 1199px) {
+  .dashboard-grid {
+    margin-left: -30px;
+    *zoom: 1;
+  }
+  .dashboard-grid:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .dashboard-grid > .dashboard-panel {
+    float: left;
+    padding-left: 30px;
+    width: 50%;
+  }
+  .dashboard-grid > .dashboard-panel:nth-of-type(2n+3) {
+    clear: left;
+  }
+  .dashboard-grid > .dashboard-panel.n3 {
+    clear: left;
+  }
+}
+@media (min-width: 1200px) {
+  .dashboard-grid {
+    margin-left: -30px;
+    *zoom: 1;
+  }
+  .dashboard-grid:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .dashboard-grid > .dashboard-panel {
+    float: left;
+    padding-left: 30px;
+    width: 25%;
+  }
+  .dashboard-grid > .dashboard-panel:nth-of-type(4n+5) {
+    clear: left;
+  }
+  .dashboard-grid > .dashboard-panel.n5 {
+    clear: left;
+  }
+}
+.dashboard-grid * {
+  box-sizing: border-box;
 }
 
 .inpanel-links {

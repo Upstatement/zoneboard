@@ -3,13 +3,13 @@
 	<h2>{{site.name}} Dashboard</h2>
 	<div class= "intro-line"><h3>Where do you want to start?</h3></div>
 
-	<ul>
+	<ul class="dashboard-grid">
 		{% for brick in bricks %}
 
-		<div class="dashboard-panel">
+		<li class="dashboard-panel">
 			
 			<div class="panel-content">
-			<li class="dashboard-brick">
+			<div class="dashboard-brick">
 			   <i class="icon fa {{brick.icon}}"></i><span class="panel-headline"> {{brick.label}}</span>
 				<div class="inpanel-links" >
 					<ul>
@@ -22,14 +22,15 @@
 						{% endfor %}
 					</ul>
 				</div>
-			</li>
+			</div>
 			</div>
 
 
-		</div>
+		</li>
 
 
 		{% endfor %}
+		
 	</ul>
 
 	<div class= "intro-line"><h3>Need some help? </h3></div>

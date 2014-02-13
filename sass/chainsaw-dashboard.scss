@@ -1,4 +1,4 @@
-// @import "base";
+@import "base";
 
 @import "fontawesome/font-awesome";
 @import "variables";
@@ -10,37 +10,55 @@
 .panel-headline {
 	font-size: 18px;
 	font-weight: 300;
-	padding-left: 7px;
+	// padding-left: 7px;
 	text-transform: uppercase;
 	letter-spacing: .07em;
   color: darken($light-blue, 20%);
 }
 
 .panel-content {
-	padding-left: 20px;
+	// 
+}
+.dashboard-brick {
+  padding: 20px;
+  box-sizing:border-box;
+      background-color: white;
+       min-height: 150px;
+       @include box-shadow($black-15 -2px -1px 5px 0px);
+        &:hover {
+      -webkit-box-shadow: -2px -1px 25px 0px $black-15;
+    -moz-box-shadow:    -2px -1px 25px 0px $black-15;
+    box-shadow:         -2px -1px 25px 0px $black-15;
+    }
+
 }
 .dashboard-panel {
     position: relative;
-    display: inline-block;
-    margin: 30px 13px 20px 10px;
-    padding: 29px 0;
-    width: 220px;
-    min-height: 150px;
+   
     vertical-align: top;
-    background-color: white;
-    text-align: left; 
+    text-align: left;
     border-radius: 8px;
-	   -webkit-box-shadow: -2px -1px 5px 0px $black-15;
-	   -moz-box-shadow:    -2px -1px 5px 0px $black-15;
-	   box-shadow:         -2px -1px 5px 0px $black-15;
+  
+   
     h4 {
     	font-weight: 200;
     	font-size: 20px;
     }
-	 &:hover {
-    	-webkit-box-shadow: -2px -1px 25px 0px $black-15;
-		-moz-box-shadow:    -2px -1px 25px 0px $black-15;
-		box-shadow:         -2px -1px 25px 0px $black-15;
+	
+}
+
+.dashboard-grid {
+  // @include mq(min, 475px){
+
+  // }
+    @include mq(475px, 1200px){
+       @include media-grid(2, 30px, '.dashboard-panel');
+    }
+    @include mq(1200px){
+        @include media-grid(4, 30px, '.dashboard-panel');
+    }
+    * {
+      box-sizing:border-box;
     }
 }
 
