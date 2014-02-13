@@ -1,67 +1,59 @@
 @import "base";
 
 @import "fontawesome/font-awesome";
-@import "variables";
 
 .intro-line h3 {
 	font-weight: 300;
+   clear:both;
 }
 
 .panel-headline {
-	font-size: 18px;
+	font-size: 1.4em;
 	font-weight: 300;
-	// padding-left: 7px;
 	text-transform: uppercase;
 	letter-spacing: .07em;
   color: darken($light-blue, 20%);
 }
-
-.panel-content {
-	// 
-}
-.dashboard-brick {
-  padding: 20px;
-  box-sizing:border-box;
-      background-color: white;
-       min-height: 150px;
-       @include box-shadow($black-15 -2px -1px 5px 0px);
-        &:hover {
-      -webkit-box-shadow: -2px -1px 25px 0px $black-15;
-    -moz-box-shadow:    -2px -1px 25px 0px $black-15;
-    box-shadow:         -2px -1px 25px 0px $black-15;
-    }
-
-}
-.dashboard-panel {
-    position: relative;
-   
-    vertical-align: top;
-    text-align: left;
-    border-radius: 8px;
-  
-   
-    h4 {
-    	font-weight: 200;
-    	font-size: 20px;
-    }
-	
+.panel-decoration {
+  background-color:$light-blue;
+  height: .4em;
+  width: 100%;
+  z-index: 1000;
 }
 
 .dashboard-grid {
-  // @include mq(min, 475px){
-
-  // }
-    @include mq(475px, 1200px){
-       @include media-grid(2, 30px, '.dashboard-panel');
-    }
-    @include mq(1200px){
-        @include media-grid(4, 30px, '.dashboard-panel');
-    }
-    * {
-      box-sizing:border-box;
-    }
+  @include box-sizing(border-box);
+  margin: 0 -20px;
 }
 
+.dashboard-panel {
+    vertical-align: top;
+    text-align: left;
+    border-radius: 8px;
+}
+
+.dashboard-brick {
+ float: left;
+ padding: 1em;
+  @include box-sizing(border-box);
+  @include mq(max, 500px){width: 100%} 
+  @include mq(500px, 738px){width: 50%} 
+  @include mq(738px, 1100px){width: 33.3%}
+  @include mq(1100px, 1380px){width: 25%}
+  @include mq(1380px){width: 20%;}
+}
+
+.panel-content {
+  padding: 2em;
+  min-height: 170px;
+  background-color: white;
+  font-size: 1em;
+  @include border-bottom-radius(1em);
+  @include box-shadow($black-15 -2px -1px 5px 0px);
+    &:hover {
+    @include box-shadow($black-15 -2px -1px 25px 0px);
+    }
+}
 
 .inpanel-links {
 	padding-top: 40px;
