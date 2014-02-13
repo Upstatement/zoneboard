@@ -23,7 +23,7 @@
 
 .dashboard-grid {
   @include box-sizing(border-box);
-  margin: 0 -20px;
+  margin: 0 -1em;
 }
 
 .dashboard-panel {
@@ -37,17 +37,17 @@
  padding: 1em;
   @include box-sizing(border-box);
   @include mq(max, 500px){width: 100%} 
-  @include mq(500px, 738px){width: 50%} 
-  @include mq(738px, 1100px){width: 33.3%}
-  @include mq(1100px, 1380px){width: 25%}
-  @include mq(1380px){width: 20%;}
+  @include mq(500px, 918px){width: 50%} 
+  @include mq(918px, 1190px){width: 33.3%}
+  @include mq(1190px, 1450px){width: 25%}
+  @include mq(1450px){width: 20%;}
 }
 
 .panel-content {
   padding: 2em;
   min-height: 170px;
   background-color: white;
-  font-size: 1em;
+  font-size: 1.1em;
   @include border-bottom-radius(1em);
   @include box-shadow($black-15 -2px -1px 5px 0px);
     &:hover {
