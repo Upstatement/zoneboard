@@ -1754,24 +1754,49 @@
   content: "\f196";
 }
 
+.intro-line {
+  clear: both;
+  padding-top: 1em;
+}
+
 .intro-line h3 {
   font-weight: 300;
   clear: both;
+  border-left: 7px solid #69a7bb;
+  -webkit-box-shadow: #afd0db 7px 0px 0px 0px inset;
+  -moz-box-shadow: #afd0db 7px 0px 0px 0px inset;
+  box-shadow: #afd0db 7px 0px 0px 0px inset;
+  vertical-align: middle;
+  background-color: white;
+  line-height: 2.5em;
+  padding-left: 1em;
+}
+
+.help h3 {
+  border-left: 7px solid #de4c42;
+  -webkit-box-shadow: #ed9e99 7px 0px 0px 0px inset;
+  -moz-box-shadow: #ed9e99 7px 0px 0px 0px inset;
+  box-shadow: #ed9e99 7px 0px 0px 0px inset;
+  background-color: white;
 }
 
 .panel-headline {
   font-size: 1.4em;
-  font-weight: 300;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .07em;
-  color: #3b7183;
+  letter-spacing: .02em;
+  color: #69a7bb;
+  padding-left: .2em;
 }
 
 .panel-decoration {
-  background-color: #69a7bb;
-  height: .4em;
+  background-color: #d2e5eb;
+  height: 13px;
   width: 100%;
   z-index: 1000;
+  -webkit-box-shadow: #69a7bb 0 7px 0 0 inset;
+  -moz-box-shadow: #69a7bb 0 7px 0 0 inset;
+  box-shadow: #69a7bb 0 7px 0 0 inset;
 }
 
 .dashboard-grid {
@@ -1779,12 +1804,13 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0 -1em;
+  clear: both;
 }
 
 .dashboard-panel {
   vertical-align: top;
   text-align: left;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .dashboard-brick {
@@ -1794,35 +1820,40 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-@media (max-width: 499px) {
+@media (max-width: 539px) {
   .dashboard-brick {
     width: 100%;
   }
 }
-@media (min-width: 500px) and (max-width: 917px) {
+@media (min-width: 540px) and (max-width: 976px) {
   .dashboard-brick {
     width: 50%;
   }
 }
-@media (min-width: 918px) and (max-width: 1189px) {
+@media (min-width: 977px) and (max-width: 1239px) {
   .dashboard-brick {
     width: 33.3%;
   }
 }
-@media (min-width: 1190px) and (max-width: 1449px) {
+@media (min-width: 1240px) and (max-width: 1497px) {
   .dashboard-brick {
     width: 25%;
   }
 }
-@media (min-width: 1450px) {
+@media (min-width: 1498px) and (max-width: 1899px) {
   .dashboard-brick {
     width: 20%;
+  }
+}
+@media (min-width: 1900px) {
+  .dashboard-brick {
+    width: 16.6%;
   }
 }
 
 .panel-content {
   padding: 2em;
-  min-height: 170px;
+  min-height: 120px;
   background-color: white;
   font-size: 1.1em;
   -moz-border-radius-bottomleft: 1em;
@@ -1831,18 +1862,19 @@
   -moz-border-radius-bottomright: 1em;
   -webkit-border-bottom-right-radius: 1em;
   border-bottom-right-radius: 1em;
-  -webkit-box-shadow: #cccccc -2px -1px 5px 0px;
-  -moz-box-shadow: #cccccc -2px -1px 5px 0px;
-  box-shadow: #cccccc -2px -1px 5px 0px;
+  -webkit-box-shadow: #cccccc 2px 2px 5px 0px;
+  -moz-box-shadow: #cccccc 2px 2px 5px 0px;
+  box-shadow: #cccccc 2px 2px 5px 0px;
 }
 .panel-content:hover {
-  -webkit-box-shadow: #cccccc -2px -1px 25px 0px;
-  -moz-box-shadow: #cccccc -2px -1px 25px 0px;
-  box-shadow: #cccccc -2px -1px 25px 0px;
+  -webkit-box-shadow: #cccccc 2px 2px 25px 0px;
+  -moz-box-shadow: #cccccc 2px 2px 25px 0px;
+  box-shadow: #cccccc 2px 2px 25px 0px;
 }
 
 .inpanel-links {
-  padding-top: 40px;
+  padding-top: 20px;
+  padding-left: 15px;
 }
 .inpanel-links .bullet-square {
   color: #bdd8e1;
@@ -1851,11 +1883,11 @@
 }
 .inpanel-links .control-links {
   text-decoration: none;
-  color: #666666;
+  color: #999999;
   line-height: .5em;
 }
 .inpanel-links ul > li:hover .bullet-square {
-  color: #356575;
+  color: #afd0db;
 }
 .inpanel-links ul > li:hover .control-links {
   color: #69a7bb;

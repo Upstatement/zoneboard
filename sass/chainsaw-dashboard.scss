@@ -1,62 +1,87 @@
 @import "base";
 
 @import "fontawesome/font-awesome";
+.intro-line {
+  clear:both;
+  padding-top: 1em;
+}
 
 .intro-line h3 {
 	font-weight: 300;
    clear:both;
+   border-left: 7px solid $light-blue;
+   @include box-shadow(lighten($light-blue, 20%) 7px 0px 0px 0px inset);
+   vertical-align: middle;
+   background-color: lighten($light-blue, 45%);
+  line-height: 2.5em;
+  padding-left: 1em;
+
 }
+
+  .help h3 {
+    border-left: 7px solid $red;
+    @include box-shadow(lighten($red, 20%) 7px 0px 0px 0px inset);
+    background-color: lighten($red, 95%);
+  }
 
 .panel-headline {
 	font-size: 1.4em;
-	font-weight: 300;
+	font-weight: 700;
 	text-transform: uppercase;
-	letter-spacing: .07em;
-  color: darken($light-blue, 20%);
+	letter-spacing: .02em;
+  color: $light-blue;
+  padding-left: .2em;
 }
 .panel-decoration {
-  background-color:$light-blue;
-  height: .4em;
+  background-color:lighten($light-blue, 30%);
+  height: 13px;
   width: 100%;
   z-index: 1000;
+  @include box-shadow ($light-blue  0 7px 0 0 inset)
 }
 
 .dashboard-grid {
   @include box-sizing(border-box);
   margin: 0 -1em;
+  clear: both;
 }
 
 .dashboard-panel {
     vertical-align: top;
     text-align: left;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .dashboard-brick {
  float: left;
  padding: 1em;
   @include box-sizing(border-box);
-  @include mq(max, 500px){width: 100%} 
-  @include mq(500px, 918px){width: 50%} 
-  @include mq(918px, 1190px){width: 33.3%}
-  @include mq(1190px, 1450px){width: 25%}
-  @include mq(1450px){width: 20%;}
+  @include mq(max, 540px){width: 100%} 
+  @include mq(540px, 977px){width: 50%} 
+  @include mq(977px, 1240px){width: 33.3%}
+  @include mq(1240px, 1498px){width: 25%}
+  @include mq(1498px, 1900px){width: 20%}
+  @include mq(1900px){width: 16.6%}
+   &:hover {
+    }
+
 }
 
 .panel-content {
   padding: 2em;
-  min-height: 170px;
+  min-height: 120px;
   background-color: white;
   font-size: 1.1em;
   @include border-bottom-radius(1em);
-  @include box-shadow($black-15 -2px -1px 5px 0px);
+  @include box-shadow($black-15 2px 2px 5px 0px);
     &:hover {
-    @include box-shadow($black-15 -2px -1px 25px 0px);
+    @include box-shadow($black-15 2px 2px 25px 0px);
     }
 }
 
 .inpanel-links {
-	padding-top: 40px;
+	padding-top: 20px;
+  padding-left: 15px;
      .bullet-square{
        	color: lighten($light-blue, 24%);
        	padding-right: 8px;
@@ -64,11 +89,11 @@
        }
        .control-links {
     	text-decoration: none;
-    	color:$black-75;
+    	color:$black-50;
     	line-height: .5em;
        }
        ul > li:hover {
-       	.bullet-square { color: darken($light-blue, 24%) }
+       	.bullet-square { color: lighten($light-blue, 20%) }
        	.control-links { color: $light-blue }
        }
 }
