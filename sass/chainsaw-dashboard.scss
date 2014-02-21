@@ -12,7 +12,6 @@
    border-left: 7px solid $light-blue;
    @include box-shadow(lighten($light-blue, 20%) 7px 0px 0px 0px inset);
    vertical-align: middle;
-   background-color: lighten($light-blue, 45%);
   line-height: 2.5em;
   padding-left: 1em;
 
@@ -21,7 +20,6 @@
   .help h3 {
     border-left: 7px solid $red;
     @include box-shadow(lighten($red, 20%) 7px 0px 0px 0px inset);
-    background-color: lighten($red, 95%);
   }
 
 .panel-headline {
@@ -69,7 +67,7 @@
 
 .panel-content {
   padding: 2em;
-  min-height: 120px;
+  min-height: 180px;
   background-color: white;
   font-size: 1.1em;
   @include border-bottom-radius(1em);
@@ -81,7 +79,7 @@
 
 .inpanel-links {
 	padding-top: 20px;
-  padding-left: 15px;
+
      .bullet-square{
        	color: lighten($light-blue, 24%);
        	padding-right: 8px;
@@ -89,7 +87,7 @@
        }
        .control-links {
     	text-decoration: none;
-    	color:$black-50;
+    	color:$black-75;
     	line-height: .5em;
        }
        ul > li:hover {
@@ -99,8 +97,10 @@
 }
 
 .icon {
-	font-size: 23px;
-  color: $light-blue;
+	font-size: 1.4em;
+  color: lighten($light-blue, 10%);
+  float:left;
+  padding-right: .4em;
 }
 
 

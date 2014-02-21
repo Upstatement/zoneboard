@@ -1767,7 +1767,6 @@
   -moz-box-shadow: #afd0db 7px 0px 0px 0px inset;
   box-shadow: #afd0db 7px 0px 0px 0px inset;
   vertical-align: middle;
-  background-color: white;
   line-height: 2.5em;
   padding-left: 1em;
 }
@@ -1777,7 +1776,6 @@
   -webkit-box-shadow: #ed9e99 7px 0px 0px 0px inset;
   -moz-box-shadow: #ed9e99 7px 0px 0px 0px inset;
   box-shadow: #ed9e99 7px 0px 0px 0px inset;
-  background-color: white;
 }
 
 .panel-headline {
@@ -1853,7 +1851,7 @@
 
 .panel-content {
   padding: 2em;
-  min-height: 120px;
+  min-height: 180px;
   background-color: white;
   font-size: 1.1em;
   -moz-border-radius-bottomleft: 1em;
@@ -1874,7 +1872,6 @@
 
 .inpanel-links {
   padding-top: 20px;
-  padding-left: 15px;
 }
 .inpanel-links .bullet-square {
   color: #bdd8e1;
@@ -1883,7 +1880,7 @@
 }
 .inpanel-links .control-links {
   text-decoration: none;
-  color: #999999;
+  color: #666666;
   line-height: .5em;
 }
 .inpanel-links ul > li:hover .bullet-square {
@@ -1894,6 +1891,8 @@
 }
 
 .icon {
-  font-size: 23px;
-  color: #69a7bb;
+  font-size: 1.4em;
+  color: #8cbccb;
+  float: left;
+  padding-right: .4em;
 }
