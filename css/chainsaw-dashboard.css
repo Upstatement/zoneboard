@@ -1785,15 +1785,9 @@
   clear: both;
 }
 
-.dashboard-panel {
-  vertical-align: top;
-  text-align: left;
-  border-radius: 4px;
-}
-
 .dashboard-brick {
   float: left;
-  padding: 2em 2em 0em 2em;
+  padding: 2em 2em 1.5em 2em;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -1825,9 +1819,11 @@
 }
 
 .panel-content {
-  padding: 0 1em;
+  padding: 1.6em 2.0em 0 2.3em;
   min-height: 210px;
   font-size: 1.1em;
+  background-color: white;
+  border: 1px solid #DEDEDE;
 }
 
 .inpanel-links {
