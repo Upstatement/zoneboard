@@ -1754,54 +1754,34 @@
   content: "\f196";
 }
 
-.intro-line {
-  clear: both;
-  padding-top: 1em;
-}
-
 .intro-line h3 {
   font-weight: 300;
   clear: both;
-  border-left: 7px solid #69a7bb;
-  -webkit-box-shadow: #afd0db 7px 0px 0px 0px inset;
-  -moz-box-shadow: #afd0db 7px 0px 0px 0px inset;
-  box-shadow: #afd0db 7px 0px 0px 0px inset;
+  border-bottom: 1px solid #e0edf1;
   vertical-align: middle;
-  line-height: 2.5em;
-  padding-left: 1em;
-}
-
-.help h3 {
-  border-left: 7px solid #de4c42;
-  -webkit-box-shadow: #ed9e99 7px 0px 0px 0px inset;
-  -moz-box-shadow: #ed9e99 7px 0px 0px 0px inset;
-  box-shadow: #ed9e99 7px 0px 0px 0px inset;
+  line-height: 2em;
+  margin-left: 1em;
 }
 
 .panel-headline {
-  font-size: 1.4em;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .02em;
+  font-size: 1.3em;
+  line-height: 2em;
+  font-weight: 600;
   color: #69a7bb;
-  padding-left: .2em;
 }
 
 .panel-decoration {
-  background-color: #d2e5eb;
-  height: 13px;
+  height: 1px;
   width: 100%;
-  z-index: 1000;
-  -webkit-box-shadow: #69a7bb 0 7px 0 0 inset;
-  -moz-box-shadow: #69a7bb 0 7px 0 0 inset;
-  box-shadow: #69a7bb 0 7px 0 0 inset;
+  background-color: #bdd8e1;
+  margin-top: 5px;
 }
 
 .dashboard-grid {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin: 0 -1em;
+  margin: 0 -2em;
   clear: both;
 }
 
@@ -1813,7 +1793,7 @@
 
 .dashboard-brick {
   float: left;
-  padding: 1em;
+  padding: 2em 2em 0em 2em;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -1823,22 +1803,22 @@
     width: 100%;
   }
 }
-@media (min-width: 540px) and (max-width: 976px) {
+@media (min-width: 540px) and (max-width: 1015px) {
   .dashboard-brick {
     width: 50%;
   }
 }
-@media (min-width: 977px) and (max-width: 1239px) {
+@media (min-width: 1016px) and (max-width: 1286px) {
   .dashboard-brick {
     width: 33.3%;
   }
 }
-@media (min-width: 1240px) and (max-width: 1497px) {
+@media (min-width: 1287px) and (max-width: 1564px) {
   .dashboard-brick {
     width: 25%;
   }
 }
-@media (min-width: 1498px) and (max-width: 1899px) {
+@media (min-width: 1565px) and (max-width: 1899px) {
   .dashboard-brick {
     width: 20%;
   }
@@ -1850,30 +1830,15 @@
 }
 
 .panel-content {
-  padding: 2em;
+  padding: 0 1em;
   min-height: 210px;
-  background-color: white;
   font-size: 1.1em;
-  -moz-border-radius-bottomleft: 1em;
-  -webkit-border-bottom-left-radius: 1em;
-  border-bottom-left-radius: 1em;
-  -moz-border-radius-bottomright: 1em;
-  -webkit-border-bottom-right-radius: 1em;
-  border-bottom-right-radius: 1em;
-  -webkit-box-shadow: #cccccc 2px 2px 5px 0px;
-  -moz-box-shadow: #cccccc 2px 2px 5px 0px;
-  box-shadow: #cccccc 2px 2px 5px 0px;
-}
-.panel-content:hover {
-  -webkit-box-shadow: #cccccc 2px 2px 25px 0px;
-  -moz-box-shadow: #cccccc 2px 2px 25px 0px;
-  box-shadow: #cccccc 2px 2px 25px 0px;
 }
 
 .inpanel-links {
   list-style-type: disc;
   list-style-position: inside;
-  padding: 20px 0 20px 20px;
+  padding: 10px 0 20px 20px;
   text-indent: -10px;
 }
 .inpanel-links .bullet-square {
@@ -1895,7 +1860,12 @@
 
 .icon {
   font-size: 1.4em;
-  color: #8cbccb;
-  float: left;
-  padding-right: .4em;
+  color: #9ac4d1;
+  line-height: 1.6em;
+  float: right;
+  margin-top: -2px;
+  margin-right: 2%;
+}
+.icon .icon:before {
+  vertical-align: center;
 }

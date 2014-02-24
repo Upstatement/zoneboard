@@ -10,10 +10,13 @@
 			
 			
 			<div class="dashboard-brick">
-			<div class="panel-decoration"> </div>
+			
 				<div class="panel-content">
 
-			   <i class="icon fa {{brick.icon}}"></i><div class="panel-headline"> {{brick.label}}</div>
+					<div class="icon"><i class="icon fa {{brick.icon}}"></i> </div>
+
+			   <div class="panel-headline"> {{brick.label}}</div>
+			   <div class="panel-decoration"> </div>
 				<div class="inpanel-links" >
 					<ul>
 						{% for link in brick.links %}
@@ -35,7 +38,5 @@
 		{% endfor %}
 		
 	</ul>
-
-	<div class= "intro-line help"><h3> Need some help? </h3></div>
-
 </div>
+
