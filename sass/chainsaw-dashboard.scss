@@ -16,7 +16,7 @@
 	font-size: 1.3em;
   line-height: 2em;
 	font-weight: 600;
-  color: $light-blue;
+  color: $blue;
 }
 .panel-decoration {
   height: 1px;
@@ -42,11 +42,10 @@
  padding: 2em 2em 0em 2em;
   @include box-sizing(border-box);
   @include mq(max, 540px){width: 100%} 
-  @include mq(540px, 1016px){width: 50%} 
-  @include mq(1016px, 1287px){width: 33.3%}
-  @include mq(1287px, 1565px){width: 25%}
-  @include mq(1565px, 1900px){width: 20%}
-  @include mq(1900px){width: 16.6%}
+  @include mq(540px, 1220px){width: 50%} 
+  @include mq(1220px, 1539px){width: 33.3%}
+  @include mq(1539px, 1900px){width: 25%}
+  @include mq(1900px){width: 20%}
    &:hover {
     }
 
@@ -65,9 +64,9 @@
     text-indent: -10px;
 
      .bullet-square{
-       	color: lighten($light-blue, 24%);
-       	padding-right: 8px;
-       	font-size: 13px;
+       	color: $blue;
+       	padding-right: 6px;
+       	font-size: 8px;
        }
        .control-links {
     	text-decoration: none;
@@ -81,8 +80,8 @@
 }
 
 .icon {
-	font-size: 1.4em;
-  color: lighten($light-blue, 14%);
+	font-size: 1.3em;
+  color: $blue;
   line-height: 1.6em;
   float:right;
   margin-top:-2px;

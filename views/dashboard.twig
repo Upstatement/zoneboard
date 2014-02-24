@@ -21,9 +21,9 @@
 					<ul>
 						{% for link in brick.links %}
 							{% if '{{' in link.url %}
-								<li><i class="bullet-square fa fa-square"></i><a class="control-links" href="{{include(template_from_string(link.url))}}">{{link.label}}</a></li>
+								<li><i class="bullet-square fa fa-circle"></i><a class="control-links" href="{{include(template_from_string(link.url))}}">{{link.label}}</a></li>
 							{% else %}
-								<li><i class="bullet-square fa fa-square"></i><a class="control-links" href="{{link.url}}">{{link.label}}</a></li>
+								<li><i class="bullet-square fa fa-circle"></i><a class="control-links" href="{{link.url}}">{{link.label}}</a></li>
 							{% endif %}
 						{% endfor %}
 					</ul>

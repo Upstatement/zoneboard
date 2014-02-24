@@ -1767,7 +1767,7 @@
   font-size: 1.3em;
   line-height: 2em;
   font-weight: 600;
-  color: #69a7bb;
+  color: #09759e;
 }
 
 .panel-decoration {
@@ -1803,29 +1803,24 @@
     width: 100%;
   }
 }
-@media (min-width: 540px) and (max-width: 1015px) {
+@media (min-width: 540px) and (max-width: 1219px) {
   .dashboard-brick {
     width: 50%;
   }
 }
-@media (min-width: 1016px) and (max-width: 1286px) {
+@media (min-width: 1220px) and (max-width: 1538px) {
   .dashboard-brick {
     width: 33.3%;
   }
 }
-@media (min-width: 1287px) and (max-width: 1564px) {
+@media (min-width: 1539px) and (max-width: 1899px) {
   .dashboard-brick {
     width: 25%;
   }
 }
-@media (min-width: 1565px) and (max-width: 1899px) {
-  .dashboard-brick {
-    width: 20%;
-  }
-}
 @media (min-width: 1900px) {
   .dashboard-brick {
-    width: 16.6%;
+    width: 20%;
   }
 }
 
@@ -1842,9 +1837,9 @@
   text-indent: -10px;
 }
 .inpanel-links .bullet-square {
-  color: #bdd8e1;
-  padding-right: 8px;
-  font-size: 13px;
+  color: #09759e;
+  padding-right: 6px;
+  font-size: 8px;
 }
 .inpanel-links .control-links {
   text-decoration: none;
@@ -1859,8 +1854,8 @@
 }
 
 .icon {
-  font-size: 1.4em;
-  color: #9ac4d1;
+  font-size: 1.3em;
+  color: #09759e;
   line-height: 1.6em;
   float: right;
   margin-top: -2px;
