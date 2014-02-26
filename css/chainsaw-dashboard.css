@@ -1755,14 +1755,14 @@
 }
 
 .intro-line h3 {
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .panel-headline {
-  font-size: 1.3em;
+  font-size: 1.1em;
   line-height: 2em;
-  font-weight: 600;
-  color: #69a7bb;
   border-bottom: 1px solid #cccccc;
   padding-bottom: 6px;
 }
@@ -1784,6 +1784,7 @@
 
 .dashboard-brick {
   float: left;
+  color: black;
   padding: 0em 1em 1.9em;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1817,10 +1818,14 @@
 
 .panel-content {
   padding: 1.6em 2.0em 0 2.3em;
-  height: 220px;
+  height: 200px;
   font-size: 1.1em;
   background-color: white;
-  border: 1px solid #DEDEDE;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
 }
 
 .inpanel-links {
@@ -1830,25 +1835,24 @@
   text-indent: -10px;
 }
 .inpanel-links .bullet-square {
-  color: #69a7bb;
-  padding-right: 6px;
-  font-size: 8px;
+  padding-right: 4px;
+  font-size: 7px;
+  vertical-align: middle;
 }
 .inpanel-links .control-links {
   text-decoration: none;
-  color: #666666;
+  color: black;
   line-height: .5em;
 }
 .inpanel-links ul > li:hover .bullet-square {
-  color: #afd0db;
+  color: #09759e;
 }
 .inpanel-links ul > li:hover .control-links {
   color: #69a7bb;
 }
 
 .icon {
-  font-size: 1.3em;
-  color: #afd0db;
+  font-size: 1.1em;
   line-height: 1.6em;
   float: right;
   margin-top: -2px;
