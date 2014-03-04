@@ -31,9 +31,9 @@
 		function load_json($json_file){
 			$json = file_get_contents(ABSPATH.$json_file);
 			$json = json_decode($json);
-			// foreach($json->bricks as &$brick){
-			// 	$brick = new ChainsawDashboardBrick($brick);
-			// }
+			foreach($json->bricks as &$brick){
+				$brick = new ChainsawDashboardBrick($brick);
+			}
 			$this->_bricks = $json->bricks;
 		}
 

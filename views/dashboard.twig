@@ -7,13 +7,11 @@
 		{% for brick in bricks %}
 
 		<li class="dashboard-panel">
-			
-			
+
 			<div class="dashboard-brick">
-			
 				<div class="panel-content">
 
-					<div class="icon"><i class="icon fa {{brick.icon}}"></i> </div>
+					<div class="icon"><i class="icon {{brick.icon.class}} {{brick.icon.slug}}"></i> </div>
 
 			   <div class="panel-headline"> {{brick.label}}</div>
 				<div class="inpanel-links" >
