@@ -9,7 +9,6 @@
 			if (is_array($data) || is_object($data)){
 				$this->init_with_data($data);
 			}
-			$this->title = $title;
 		}
 
 		function init_with_data($data){
