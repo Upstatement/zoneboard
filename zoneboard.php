@@ -1,15 +1,15 @@
 <?php
 	/*
-	Plugin Name: Chainsaw Dashboard
-	Plugin URI: http://upstatement.com/plugins/chainsaw-dashboard
+	Plugin Name: Zoneboard
+	Plugin URI: http://upstatement.com/zoneboard
 	Description: Cleans up the WordPress Dashboard
-	Version: 0.1
+	Version: 0.2
 	Author: Upstatement
 	*/
 
-	require_once('chainsaw-dashboard-brick.php');
+	require_once('zoneboard-block.php');
 
-	class ChainsawDashboard {
+	class Zoneboard {
 
 		var $_bricks;
 		var $vars;
@@ -29,10 +29,10 @@
 		}
 
 		function load_json($json_file){
-			$json = file_get_contents(ABSPATH.$json_file);
+			$json = file_get_contents($json_file);
 			$json = json_decode($json);
 			foreach($json->bricks as &$brick){
-				$brick = new ChainsawDashboardBrick($brick);
+				$brick = new ZoneboardBlock($brick);
 			}
 			$this->_bricks = $json->bricks;
 		}
@@ -41,13 +41,13 @@
 			if( is_admin() ) {
 				$screen = get_current_screen();
 				if($screen->base == 'dashboard') {
-					wp_redirect( admin_url( 'index.php?page=custom-dashboard' ) );
+					wp_redirect( admin_url( 'index.php?page=zoneboard' ) );
 				}
 			}
 		}
 
 		function register_menu(){
-			 add_dashboard_page( 'Dashboard', 'Dashboard', 'read', 'custom-dashboard', array( $this,'create_dashboard') );
+			 add_dashboard_page( 'Zoneboard', 'Zoneboard', 'read', 'zoneboard', array( $this,'create_dashboard') );
 		}
 
 		function create_dashboard(){
@@ -57,10 +57,11 @@
 			$data = array();
 			$data['site'] = new TimberSite();
 			$data['bricks'] = $this->_bricks;
+			$data['plugin_base'] = plugins_url();
 			foreach($this->vars as $key=>$var){
 				$data[$key] = $var;
 			}
-			Timber::render('dashboard.twig', $data);
+			Timber::render('views/dashboard.twig', $data);
 		}
 
 		public function add_var($var_name, $callback){
@@ -83,5 +84,8 @@
 			}
 		}
 
-
 	}
+
+	// add_action('admin_init', function(){
+		$zoneboard = new Zoneboard( get_stylesheet_directory().'/zoneboard.json' );
+	// });
