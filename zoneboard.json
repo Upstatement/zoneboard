@@ -1,0 +1,71 @@
+{
+    "bricks" : [
+        {
+            "label"     :   "Home Page",
+            "icon"      :   "fa-home",
+            "links"     :   [
+                {
+                    "label" :   "Manage 'highlights'",
+                    "url"   :   "/wp-admin/admin.php?page=acf-options-homepage#acf-highlights"
+                },
+                {
+                    "label" :   "Homepage Logo Pond",
+                    "url"   :   "/wp-admin/admin.php?page=acf-options-homepage"
+                }
+            ]
+        },
+        {
+            "label"     :   "Site-Wide",
+            "icon"      :   "fa-sitemap",
+            "links" :   [
+                {
+                    "label" :   "Main Menu",
+                    "url"   :   "/wp-admin/nav-menus.php"
+                },
+                {
+                    "label" :   "Site Info",
+                    "url"   :   "/wp-admin/admin.php?page=acf-options-site-info"
+                }
+            ]
+        },
+        {
+            "label"     :   "Portfolio Page",
+            "icon"      :   "dashicons-portfolio",
+            "links"     :   [
+                {
+                    "label" :   "Promos at top of Page",
+                    "url"   :   "/wp-admin/post.php?post=3251&action=edit"
+                },
+                {
+                    "label" :   "Client List",
+                    "url"   :   "/wp-admin/post.php?post=2009&action=edit"
+                }
+            ]
+        },
+        {
+            "label"     :   "Tech Info",
+            "icon"      :   "fa-github-alt",
+            "links"     :   [
+                {
+                    "label" :   "GitHub Repo",
+                    "url"   :   "https://github.com/upstatement/blades/"
+                }
+            ]
+        },
+        {
+            "label"     :   "Links, Etc.",
+            "icon"      :   "fa-link",
+            "links"     :   [
+                {
+                    "label" :   "Manage redirects",
+                    "url"   :   "/wp-admin/edit.php?post_type=redirect_rule"
+                },
+                {
+                    "label" :   "Create a new redirect",
+                    "url"   :   "/wp-admin/post-new.php?post_type=redirect_rule"
+                }
+            ]
+        }
+    ]
+
+}

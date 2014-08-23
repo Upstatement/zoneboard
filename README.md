@@ -1,11 +1,9 @@
-The dashboard is the screen that HLR's authors and editors will see when they login to manage the website. Right now, we're using the default WordPress admin (which sucks). We want to create a better experience for those users. We should begin considering:
+### This is what a Zoneboard looks like
 
-"What does a publication editor or author want to do and know?"
+![screen shot 2014-08-22 at 11 03 30 pm](https://cloud.githubusercontent.com/assets/1298086/4019502/9593b544-2a72-11e4-9fad-276b864bd012.png)
 
-Some of these things might include:
-- Perform a piece of content maintenance on the site (update the current Issue)
-- Look at the most viewed stories from yesterday
-
-Some of your tasks might include
-- Look at other publication dashboards
-- Look at publication reporting services (Chartbeat, etc.)
+### To use
+- Install this in your `/plugins` directory
+- You'll need [Timber](https://github.com/jarednova/timber)
+- Copy `zoneboard.json` to your theme
+- Modify as neccessary, for icons you can use both WordPress's [Dashicons](http://melchoyce.github.io/dashicons/) and [FontAwesome](http://fortawesome.github.io/Font-Awesome/)
