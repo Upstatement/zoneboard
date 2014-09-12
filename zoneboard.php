@@ -56,7 +56,7 @@
 
 		function show_message_for_missing_json_file( $json_file ) {
 			$class = 'error';
-			$text = 'No zoneboard.json file was found. Create one at '.$json_file. ' for your Zoneboard to appear here';
+			$text = 'No zoneboard.json file was found. Create one at <strong>'.$json_file. '</strong> for your Zoneboard to appear here';
 			add_action( 'admin_notices', function() use ( $text, $class ) {
 					echo '<div class="'.$class.'"><p>'.$text.'</p></div>';
 				}, 1 );
