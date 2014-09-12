@@ -3,7 +3,7 @@
 	Plugin Name: Zoneboard
 	Plugin URI: http://upstatement.com/zoneboard
 	Description: Cleans up the WordPress Dashboard
-	Version: 0.2
+	Version: 0.3
 	Author: Upstatement
 	*/
 
@@ -29,12 +29,16 @@
 		}
 
 		function load_json($json_file){
-			$json = file_get_contents($json_file);
-			$json = json_decode($json);
-			foreach($json->bricks as &$brick){
-				$brick = new ZoneboardBlock($brick);
+			if (file_exists($json_file)){
+				$json = file_get_contents($json_file);
+				$json = json_decode($json);
+				foreach($json->bricks as &$brick){
+					$brick = new ZoneboardBlock($brick);
+				}
+				$this->_bricks = $json->bricks;
+			} else {
+				$this->show_message_for_missing_json_file( $json_file );
 			}
-			$this->_bricks = $json->bricks;
 		}
 
 		function redirect_dashboard(){
@@ -50,10 +54,22 @@
 			 add_dashboard_page( 'Zoneboard', 'Zoneboard', 'read', 'zoneboard', array( $this,'create_dashboard') );
 		}
 
+		function show_message_for_missing_json_file( $json_file ) {
+			$class = 'error';
+			$text = 'No zoneboard.json file was found. Create one at '.$json_file. ' for your Zoneboard to appear here';
+			add_action( 'admin_notices', function() use ( $text, $class ) {
+					echo '<div class="'.$class.'"><p>'.$text.'</p></div>';
+				}, 1 );
+		}
+
+		function check_sysreqs() {
+			if (!class_exists('Timber')) {
+				trigger_error('Zoneboard requires Timber', E_USER_ERROR);
+			}
+		}
+
 		function create_dashboard(){
-			require_once( ABSPATH . 'wp-load.php' );
-			require_once( ABSPATH . 'wp-admin/admin.php' );
-			require_once( ABSPATH . 'wp-admin/admin-header.php' );
+			$this->check_sysreqs();
 			$data = array();
 			$data['site'] = new TimberSite();
 			$data['bricks'] = $this->_bricks;
