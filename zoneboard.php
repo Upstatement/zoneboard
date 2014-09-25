@@ -73,7 +73,7 @@
 			$data = array();
 			$data['site'] = new TimberSite();
 			$data['bricks'] = $this->_bricks;
-			$data['plugin_base'] = plugins_url();
+			$data['stylesheet'] = plugins_url('css/zoneboard.css', __FILE__);
 			foreach($this->vars as $key=>$var){
 				$data[$key] = $var;
 			}
