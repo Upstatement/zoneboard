@@ -1,6 +1,18 @@
 @import "base";
 @import "fontawesome/font-awesome";
 
+@font-face {
+  font-family: 'proximanova';
+  src: url('../fonts/proximanova-light/proximanova-light-webfont.eot?v=#{$fa-version}');
+  src: url('../fonts/proximanova-light/proximanova-light-webfont.eot?#iefix&v=#{$fa-version}') format('embedded-opentype'),
+    url('../fonts/proximanova-light/proximanova-light-webfont.woff?v=#{$fa-version}') format('woff'),
+    url('../fonts/proximanova-light/proximanova-light-webfont.ttf?v=#{$fa-version}') format('truetype'),
+    url('../fonts/proximanova-light/proximanova-light-webfont.svg?v=#{$fa-version}#proximanova') format('svg');
+  //src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
+  font-weight: normal;
+  font-style: normal;
+}
+
 .logo-banner {
   background-color: #fff;
   margin-left: -20px;
@@ -15,10 +27,29 @@
   }
 }
 
-.intro-line h3 {
+.intro-line {
+  display: block;
+
+  @include mq(800px, 1700px) {
+  display: inline-block;
+  float: right;
+}
+
+  >h3 {
+  font-family: 'proximanova';
 	font-size: 18px;
 font-weight: 400;
 line-height: 24px;
+}
+}
+
+.wrap {
+  font-family: 'proximanova';
+  >h2 {
+
+    font-size: 30px;
+    display: inline-block;
+  }
 }
 
 .panel-headline {
@@ -44,7 +75,7 @@ line-height: 24px;
 
 .dashboard-brick {
  float: left;
- color: black;
+ color: #004f45;
  padding: 0em 1em 1.9em;
   @include box-sizing(border-box);
   @include mq(max, 540px){width: 100%}
@@ -52,19 +83,27 @@ line-height: 24px;
   @include mq(1220px, 1539px){width: 33.3%}
   @include mq(1539px, 1900px){width: 25%}
   @include mq(1900px){width: 20%}
+
+  // &.icon {
+  //   color: #004f45 !important;
+  // }
 }
+
 .panel-content {
   padding: 1.6em 2.0em 0 2.3em;
-  height: 200px;
   font-size: 1.1em;
   background-color: white;
   @include border-radius(4px);
+
+  @include mq(540px) {
+    height: 200px;
+  }
 }
 
 .inpanel-links {
     list-style-type: disc;
     list-style-position: inside;
-    padding: 16px 0 20px 20px;
+    padding: 16px 0 20px 10px;
     text-indent: -10px;
      .bullet-square{
        	padding-right: 4px;
@@ -78,12 +117,20 @@ line-height: 24px;
        }
        ul > li:hover {
        	.bullet-square { color: $blue }
-       	.control-links { color: $light-blue }
+       	.control-links { color: #40b797}
        }
 }
 
+// .control-links {
+//   padding-left: -10px;
+// }
+
+.bullet-square {
+  display: none;
+}
+
 .icon {
-	font-size: 1.1em;
+	font-size: 1.3em;
   line-height: 1.6em;
   float:right;
   margin-top:-2px;
