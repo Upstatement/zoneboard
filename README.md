@@ -9,4 +9,3 @@
 - You'll need [Timber](https://github.com/jarednova/timber)
 - Copy `zoneboard.json` to your theme
 - Modify as neccessary, for icons you can use both WordPress's [Dashicons](http://melchoyce.github.io/dashicons/) and [FontAwesome](http://fortawesome.github.io/Font-Awesome/)
-change
