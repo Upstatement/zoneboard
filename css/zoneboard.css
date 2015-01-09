@@ -1810,7 +1810,7 @@
 
 .dashboard-brick {
   float: left;
-  color: #000;
+  color: #004f45;
   padding: 0em 1em 1.9em;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -1889,5 +1889,4 @@
   float: right;
   margin-top: -2px;
   margin-right: 2%;
-  color: #004f45;
 }

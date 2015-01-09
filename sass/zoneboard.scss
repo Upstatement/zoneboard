@@ -75,7 +75,7 @@ line-height: 24px;
 
 .dashboard-brick {
  float: left;
- color: #000;
+ color: #004f45;
  padding: 0em 1em 1.9em;
   @include box-sizing(border-box);
   @include mq(max, 540px){width: 100%}
@@ -135,7 +135,6 @@ line-height: 24px;
   float:right;
   margin-top:-2px;
   margin-right: 2%;
-  color: #004f45;
 }
 
 
