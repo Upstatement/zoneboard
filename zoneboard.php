@@ -21,6 +21,7 @@
     		add_filter('get_twig', array($this, 'add_twig_extensions'));
     		$this->vars = array();
     		$this->load_json($json_file);
+    		
 		}
 
 		function add_twig_extensions($twig){
@@ -35,9 +36,16 @@
 				foreach($json->bricks as &$brick){
 					$brick = new ZoneboardBlock($brick);
 				}
+				$this->json_data = $json;
 				$this->_bricks = $json->bricks;
-			} else {
-				$this->show_message_for_missing_json_file( $json_file );
+			} else if (is_admin()) {
+				$url = TimberHelper::get_current_url();
+				$parts = parse_url($url);
+				if ((isset($parts['query']) && $parts['query'] == 'page=zoneboard')
+						|| (isset($parts['path']) && strpos($parts['path'], 'wp-admin/plugins.php'))
+					) {
+					$this->show_message_for_missing_json_file( $json_file );
+				}
 			}
 		}
 
@@ -73,6 +81,9 @@
 			$data = array();
 			$data['site'] = new TimberSite();
 			$data['bricks'] = $this->_bricks;
+			if ( isset($this->json_data->message )) {
+				$data['message'] = $this->json_data->message;
+			}
 			$data['stylesheet'] = plugins_url('css/zoneboard.css', __FILE__);
 			foreach($this->vars as $key=>$var){
 				$data[$key] = $var;
