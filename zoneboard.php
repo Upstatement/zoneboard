@@ -3,7 +3,7 @@
 	Plugin Name: Zoneboard
 	Plugin URI: http://upstatement.com/zoneboard
 	Description: Cleans up the WordPress Dashboard
-	Version: 0.3
+	Version: 0.4
 	Author: Upstatement
 	*/
 
@@ -19,8 +19,17 @@
 			add_action('admin_menu', array( $this,'register_menu') );
     		add_action('load-index.php', array( $this,'redirect_dashboard') );
     		add_filter('get_twig', array($this, 'add_twig_extensions'));
+    		if (isset($_GET['action']) && $_GET['action'] == 'copy_zoneboard_file') {
+    			$this->copy_zoneboard_starter();
+    		}
     		$this->vars = array();
     		$this->load_json($json_file);
+		}
+
+		function copy_zoneboard_starter() {
+			$src = plugin_dir_path(__FILE__).'zoneboard.json';
+			$destination = get_stylesheet_directory().'/zoneboard.json';
+			$copy = copy($src, $destination);
 		}
 
 		function add_twig_extensions($twig){
@@ -35,9 +44,16 @@
 				foreach($json->bricks as &$brick){
 					$brick = new ZoneboardBlock($brick);
 				}
+				$this->json_data = $json;
 				$this->_bricks = $json->bricks;
-			} else {
-				$this->show_message_for_missing_json_file( $json_file );
+			} else if (is_admin()) {
+				$url = TimberHelper::get_current_url();
+				$parts = parse_url($url);
+				if ((isset($parts['query']) && $parts['query'] == 'page=zoneboard')
+						|| (isset($parts['path']) && strpos($parts['path'], 'wp-admin/plugins.php'))
+					) {
+					$this->show_message_for_missing_json_file( $json_file );
+				}
 			}
 		}
 
@@ -56,7 +72,7 @@
 
 		function show_message_for_missing_json_file( $json_file ) {
 			$class = 'error';
-			$text = 'No zoneboard.json file was found. Create one at <strong>'.$json_file. '</strong> for your Zoneboard to appear here';
+			$text = 'No zoneboard.json file was found. Create one at <strong>'.$json_file. '</strong> for your Zoneboard to appear here. You can also <a href="'.admin_url().'?action=copy_zoneboard_file">Copy the default starter Zoneboard into your theme</a>';
 			add_action( 'admin_notices', function() use ( $text, $class ) {
 					echo '<div class="'.$class.'"><p>'.$text.'</p></div>';
 				}, 1 );
@@ -73,6 +89,9 @@
 			$data = array();
 			$data['site'] = new TimberSite();
 			$data['bricks'] = $this->_bricks;
+			if ( isset($this->json_data->message )) {
+				$data['message'] = $this->json_data->message;
+			}
 			$data['stylesheet'] = plugins_url('css/zoneboard.css', __FILE__);
 			foreach($this->vars as $key=>$var){
 				$data[$key] = $var;
