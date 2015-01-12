@@ -1744,13 +1744,6 @@
   content: "";
 }
 
-@font-face {
-  font-family: 'proximanova';
-  src: url("../fonts/proximanova-light/proximanova-light-webfont.eot?v=4.0.3");
-  src: url("../fonts/proximanova-light/proximanova-light-webfont.eot?#iefix&v=4.0.3") format("embedded-opentype"), url("../fonts/proximanova-light/proximanova-light-webfont.woff?v=4.0.3") format("woff"), url("../fonts/proximanova-light/proximanova-light-webfont.ttf?v=4.0.3") format("truetype"), url("../fonts/proximanova-light/proximanova-light-webfont.svg?v=4.0.3#proximanova") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
 .logo-banner {
   background-color: #fff;
   margin-left: -20px;
@@ -1772,15 +1765,11 @@
   }
 }
 .intro-line > h3 {
-  font-family: 'proximanova';
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
 }
 
-.wrap {
-  font-family: 'proximanova';
-}
 .wrap > h2 {
   font-size: 30px;
   display: inline-block;
@@ -1791,6 +1780,8 @@
   line-height: 2em;
   border-bottom: 1px solid #ccc;
   padding-bottom: 6px;
+  font-weight: bold;
+  color: #004f45;
 }
 
 .panel-decoration {
@@ -1821,22 +1812,22 @@
     width: 100%;
   }
 }
-@media (min-width: 540px) and (max-width: 1219px) {
+@media (min-width: 540px) and (max-width: 1119px) {
   .dashboard-brick {
     width: 50%;
   }
 }
-@media (min-width: 1220px) and (max-width: 1538px) {
+@media (min-width: 1120px) and (max-width: 1438px) {
   .dashboard-brick {
     width: 33.3%;
   }
 }
-@media (min-width: 1539px) and (max-width: 1899px) {
+@media (min-width: 1439px) and (max-width: 1799px) {
   .dashboard-brick {
     width: 25%;
   }
 }
-@media (min-width: 1900px) {
+@media (min-width: 1800px) {
   .dashboard-brick {
     width: 20%;
   }

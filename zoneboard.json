@@ -1,4 +1,5 @@
 {
+    "message" : "Where do you want to start?",
     "bricks" : [
         {
             "label"     :   "Home Page",
