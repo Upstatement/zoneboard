@@ -1752,7 +1752,7 @@
 }
 
 .logo-banner img {
-  max-height: 100%;
+  max-height: 100px;
 }
 
 .wp-menu-name:after {
