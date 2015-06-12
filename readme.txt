@@ -2,7 +2,7 @@
 Contributors: jarednova
 Tags: dashboard, admin, json
 Requires at least: 3.7
-Stable tag: 0.4
+Stable tag: 0.5
 Tested up to: 4.1
 PHP version: 5.3.0 or greater
 License: GPLv2 or later
@@ -30,6 +30,10 @@ Zoneboard replaces the default WordPress dashboard (wait, you were reading WordP
 Please use the [GitHub repo](https://github.com/upstatement/zoneobard/issues?state=open) to file bugs or questions.
 
 == Changelog ==
+
+= 0.5 =
+* Allow custom URLs for logos
+* Allow for callbacks for bricks
 
 = 0.4 =
 * Updated UI

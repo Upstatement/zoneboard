@@ -3,7 +3,7 @@
 	Plugin Name: Zoneboard
 	Plugin URI: http://upstatement.com/zoneboard
 	Description: Cleans up the WordPress Dashboard
-	Version: 0.4
+	Version: 0.5
 	Author: Upstatement
 	*/
 
