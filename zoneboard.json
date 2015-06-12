@@ -32,16 +32,7 @@
         {
             "label"     :   "Portfolio Page",
             "icon"      :   "dashicons-portfolio",
-            "links"     :   [
-                {
-                    "label" :   "Promos at top of Page",
-                    "url"   :   "/wp-admin/post.php?post=3251&action=edit"
-                },
-                {
-                    "label" :   "Client List",
-                    "url"   :   "/wp-admin/post.php?post=2009&action=edit"
-                }
-            ]
+            "callback"	:	"zoneboard_hello_world"
         },
         {
             "label"     :   "Tech Info",

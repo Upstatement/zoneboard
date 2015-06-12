@@ -124,3 +124,7 @@
 	// add_action('admin_init', function(){
 		$zoneboard = new Zoneboard( get_stylesheet_directory().'/zoneboard.json' );
 	// });
+	//
+	function zoneboard_hello_world() {
+		echo "Zoneboard Hello World!";
+	}

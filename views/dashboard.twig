@@ -18,6 +18,9 @@
 
 			   <div class="panel-headline"> {{brick.label}}</div>
 				<div class="inpanel-links" >
+					{% if brick.callback %}
+						{{function(brick.callback)}}
+					{% endif %}
 					<ul>
 						{% for link in brick.links %}
 							{% if '{{' in link.url %}
