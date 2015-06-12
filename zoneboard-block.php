@@ -25,7 +25,6 @@ class ZoneboardBlock {
 				$funcs = explode('::', $this->callback);
 				$class = $funcs[0];
 				$this->callback = array('StoreyImport', 'render_dashboard_widget');
-				print_r($this->callback);
 			}
 		}
 	}

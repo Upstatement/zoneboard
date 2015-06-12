@@ -92,9 +92,10 @@
 			if ( isset($this->json_data->message )) {
 				$data['message'] = $this->json_data->message;
 			}
-      if ( isset($this->json_data->logo_url )) {
-        $data['logo_url'] = $this->json_data->logo_url;
-      }
+			$data['logo_url'] = "https://raw.githubusercontent.com/jonsherrard/zoneboard/master/logo.png";
+			if ( isset($this->json_data->logo_url )) {
+				$data['logo_url'] = $this->json_data->logo_url;
+			}
 			$data['stylesheet'] = plugins_url('css/zoneboard.css', __FILE__);
 			foreach($this->vars as $key=>$var){
 				$data[$key] = $var;
