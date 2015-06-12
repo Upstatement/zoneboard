@@ -6,7 +6,12 @@ $zoneboard-green : #004f45;
 .logo-banner {
   background-color: #fff;
   margin-left: -20px;
+  max-height: 100px;
   padding: 15px 0 15px 20px;
+}
+
+.logo-banner img {
+  max-height: 100px;
 }
 
 .wp-menu-name {
