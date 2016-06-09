@@ -47,7 +47,7 @@
 				$this->json_data = $json;
 				$this->_bricks = $json->bricks;
 			} else if (is_admin()) {
-				$url = TimberHelper::get_current_url();
+				$url = Timber\URLHelper::get_current_url();
 				$parts = parse_url($url);
 				if ((isset($parts['query']) && $parts['query'] == 'page=zoneboard')
 						|| (isset($parts['path']) && strpos($parts['path'], 'wp-admin/plugins.php'))
