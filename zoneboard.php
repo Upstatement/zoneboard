@@ -47,6 +47,9 @@
 				$this->json_data = $json;
 				$this->_bricks = $json->bricks;
 			} else if (is_admin()) {
+				if ( !$this->check_sysreqs() ) {
+					return;
+				}
 				$url = Timber\URLHelper::get_current_url();
 				$parts = parse_url($url);
 				if ((isset($parts['query']) && $parts['query'] == 'page=zoneboard')
@@ -79,13 +82,21 @@
 		}
 
 		function check_sysreqs() {
-			if (!class_exists('Timber')) {
-				trigger_error('Zoneboard requires Timber', E_USER_ERROR);
+			if (!class_exists( 'Timber')) {
+				$class = 'error';
+				$text = 'Zoneboard requires Timber. Make sure you activate Timber in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php' ) ) . '</a>';
+				add_action( 'admin_notices', function() use ( $text, $class ) {
+					echo '<div class="'.$class.'"><p>'.$text.'</p></div>';
+				} );
+				return false;
 			}
+			return true;
 		}
 
 		function create_dashboard(){
-			$this->check_sysreqs();
+			if ( !$this->check_sysreqs() ) {
+				return;
+			}
 			$data = array();
 			$data['site'] = new TimberSite();
 			$data['bricks'] = $this->_bricks;
