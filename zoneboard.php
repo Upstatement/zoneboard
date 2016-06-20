@@ -23,7 +23,10 @@
     			$this->copy_zoneboard_starter();
     		}
     		$this->vars = array();
-    		$this->load_json($json_file);
+    		$data = $this->load_json($json_file);
+    		if ( $data->bricks ) {
+    			$this->_bricks = $this->create_bricks($data->bricks);
+    		}
 		}
 
 		function copy_zoneboard_starter() {
@@ -41,11 +44,7 @@
 			if (file_exists($json_file)){
 				$json = file_get_contents($json_file);
 				$json = json_decode($json);
-				foreach($json->bricks as &$brick){
-					$brick = new ZoneboardBlock($brick);
-				}
-				$this->json_data = $json;
-				$this->_bricks = $json->bricks;
+				return $json;
 			} else if (is_admin()) {
 				if ( !$this->check_sysreqs() ) {
 					return;
@@ -58,6 +57,13 @@
 					$this->show_message_for_missing_json_file( $json_file );
 				}
 			}
+		}
+
+		function create_bricks( array $data ) {
+			foreach($data as &$brick){
+				$brick = new ZoneboardBlock($brick);
+			}
+			return $data;
 		}
 
 		function redirect_dashboard(){
@@ -114,14 +120,14 @@
 			Timber::render('views/dashboard.twig', $data);
 		}
 
-		public function add_var($var_name, $callback){
+		public function add_var( $var_name, $callback ){
 			if (is_callable($callback)){
 				$callback = $callback();
 			}
 			$this->vars[$var_name] = $callback;
 		}
 
-		public function add_brick($block){
+		public function add_brick( $block ){
 			if (!$this->_bricks){
 				$this->_bricks = array();
 			}
